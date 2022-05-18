@@ -26,7 +26,7 @@ export const Wrapper = styled.header`
                 color: ${Colors.blue1};
                 background-color: ${Colors.blueLight};
                 transition: all .3s ease;
-                box-shadow: ${Colors.blue4}  5px 5px 20px 2px;
+                box-shadow: ${Colors.blue4}  3px 3px 8px 0px;
             }
         }
     }

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { Colors } from "./Colors";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -25,6 +26,12 @@ export const GlobalStyle = createGlobalStyle`
 
         :visited {
             color: inherit;
+        }
+    }
+
+    input, button, a {
+        :focus-visible {
+            outline: ${Colors.blue1} 3px outset;
         }
     }
 `;

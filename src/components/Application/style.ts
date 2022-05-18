@@ -9,7 +9,7 @@ export const Wrapper = styled.main`
     width: 100%;
     background-color: ${Colors.blue1};
     color: ${Colors.blueLight};
-    padding: 30px 0;
+    padding: 40px 0;
 
     img {
         width: 100%;
