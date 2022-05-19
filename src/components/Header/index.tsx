@@ -1,6 +1,11 @@
+import Link from "next/link"
 import { Wrapper } from "./style"
 
-export default function Header () {
+interface HeaderProps {
+    page: string,
+}
+
+export default function Header ({ page }: HeaderProps) {
     return (
         <Wrapper>
             <svg width="63" height="24" viewBox="0 0 63 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,8 +14,16 @@ export default function Header () {
 
             <nav>
                 <ul>
-                    <li>Sobre</li>
-                    <li>Contato</li>
+                    <li className={page == "Home" ? "active" : ""}>
+                        <Link href={"/"}>Home</Link>
+                    </li>
+                    <li className={page == "Rooms" ? "active" : ""}>
+                        <Link href={"/Rooms"}>Salas</Link>
+                    </li>
+                    <li className={page == "Contact" ? "active" : ""}>
+                        <Link href={"/Contact"}>Contato</Link>
+                    </li>
+
                 </ul>
             </nav>
         </Wrapper>

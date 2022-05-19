@@ -15,14 +15,19 @@ export const Wrapper = styled.header`
     ul {
         display: flex;
         flex-direction: row;
+        gap: 10px;
 
         li {
-            padding: 10px 20px;
             border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
+            
+            a {
+                display: block;
+                cursor: pointer;
+                font-weight: 500;
+                padding: 10px 20px;
+            }
 
-            :hover {
+            &:hover, &.active {
                 color: ${Colors.blue1};
                 background-color: ${Colors.blueLight};
                 transition: all .3s ease;

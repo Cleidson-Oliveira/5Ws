@@ -8,8 +8,8 @@ export const Wrapper = styled.footer`
     align-items: center;
     width: 100%;
     height: 120px;
-    background-color: ${Colors.blueLight};
-    color: ${Colors.blue1};
+    background-color: ${Colors.blue1};
+    color: ${Colors.blueLight};
 
     a {
         font-weight: 600;

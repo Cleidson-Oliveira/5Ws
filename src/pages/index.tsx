@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       <Head>
         <title>5Ws | Home</title>
       </Head>
-      <Header />
+      <Header page="Home"/>
       <AppDescription />
       <Main />
       <Footer />
