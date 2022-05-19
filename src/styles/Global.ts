@@ -6,10 +6,23 @@ export const GlobalStyle = createGlobalStyle`
         // trabalhar os tamanhos das fontes
     }
 
+    @media (max-width: 1080px) {
+        html {
+            font-size: 93.75%;
+        }
+    }
+    
+    @media (max-width: 720px) {
+        html {
+            font-size: 87.5%;
+        }
+    }
+
     * {
         margin: 0;
         padding: 0;
         font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
     }
 
     html, body {
