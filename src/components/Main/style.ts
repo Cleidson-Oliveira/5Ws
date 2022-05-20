@@ -8,8 +8,8 @@ export const Wrapper = styled.main`
     grid-column-gap: 1fr;
     justify-content: center;
     width: 100%;
-    background-color: ${Colors.blueLight};
-    color: #708197;
+    background-color: ${Colors.color5};
+    color: ${Colors.color1};
     padding: 40px 0;
 
     img {
@@ -36,8 +36,15 @@ export const Wrapper = styled.main`
     & section:nth-child(2) {
         grid-column: 2/5;
         grid-row: 2/3;
+        opacity: 0;
+        transform: translateX(200px);
+        transition: all .5s ease;
         
-        
+        &.anima {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
         img {
             margin-right: 20px;
         }
@@ -46,6 +53,14 @@ export const Wrapper = styled.main`
     & section:nth-child(3) {
         grid-column: 3/6;
         grid-row: 3/4;
+        opacity: 0;
+        transform: translateX(-200px);
+        transition: all .5s ease;
+        
+        &.anima {
+            transform: translateX(0);
+            opacity: 1;
+        }
 
         p {
             text-align: right;
@@ -60,6 +75,15 @@ export const Wrapper = styled.main`
         grid-column: 2/6;
         grid-row: 4/5;
         justify-content: space-around;
+        
+        &.anima {
+
+            article {
+                transform: scale(1, 1);
+                opacity: 1;
+            }
+            
+        }
 
         article {
             box-sizing: border-box;
@@ -69,11 +93,14 @@ export const Wrapper = styled.main`
             border-radius: 10px;
             background-color: ${Colors.blue4};
             text-align: center;
+            opacity: 0;
+            transform: scale(.5, .5);
+            transition: all .5s ease;
             
             p {
                 font-size: 1.1rem;
                 padding: 0;
-                color: ${Colors.font2};
+                color: ${Colors.color3};
             }
         }
     }
@@ -84,11 +111,21 @@ export const Wrapper = styled.main`
         display: flex;
         justify-content: space-evenly;
 
+        &.anima {
+            p, img {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         p {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             height: 80%;
+            opacity: 0;
+            transform: translateX(200px);
+            transition: all .5s ease;
 
             span {
                 display: block;
@@ -103,6 +140,9 @@ export const Wrapper = styled.main`
         img {
             max-height: 350px;
             width: auto;
+            opacity: 0;
+            transform: translateX(-200px);
+            transition: all .5s ease;
         }
     }
 

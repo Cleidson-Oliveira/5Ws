@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Footer from '../components/Footer';
 
 import Header from '../components/Header';
-import Main from '../components/Application';
+import Main from '../components/Main';
 import { GlobalStyle } from '../styles/Global';
 import AppDescription from '../components/AppDescription';
 

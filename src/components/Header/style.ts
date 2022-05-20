@@ -6,11 +6,11 @@ export const Wrapper = styled.header`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 120px;
+    height: 150px;
     padding: 0 40px;
     box-sizing: border-box;
-    background-color: ${Colors.blue1};
-    color: ${Colors.blueLight};
+    background-color: ${Colors.color1};
+    color: ${Colors.color3};
     
     ul {
         display: flex;
@@ -28,10 +28,10 @@ export const Wrapper = styled.header`
             }
 
             &:hover, &.active {
-                color: ${Colors.blue1};
-                background-color: ${Colors.blueLight};
+                color: ${Colors.color1};
+                background-color: ${Colors.color3};
                 transition: all .3s ease;
-                box-shadow: ${Colors.blue4}  3px 3px 8px 0px;
+                /* box-shadow: ${Colors.color2} 4px 4px 3px 0px; */
             }
         }
     }
