@@ -4,11 +4,12 @@ import { Wrapper } from "./style";
 interface InputProps {
     name: string,
     placeholder: string
+    value: [string, (param: string) => void]
 }
 
-export default function Input ({ name, placeholder }: InputProps) {
+export default function Input ({ name, placeholder, value: valueProps }: InputProps) {
 
-    const [value, setValue] = useState('')
+    const [value, setValue] = valueProps
 
     return (
         <Wrapper>
