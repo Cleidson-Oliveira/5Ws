@@ -16,6 +16,6 @@ export const StyledButton = styled.button`
     :hover {
         color: ${Colors.blueLight};
         background-color: ${Colors.blue1};
-        box-shadow: ${Colors.blue4}  8px 6px 20px 2px;
+        box-shadow: ${Colors.blue4} 5px 5px 10px 0px;
     }
 `;

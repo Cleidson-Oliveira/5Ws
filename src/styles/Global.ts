@@ -3,7 +3,7 @@ import { Colors } from "./Colors";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
-        // trabalhar os tamanhos das fontes
+        font-size: 1rem;
     }
 
     @media (max-width: 1080px) {
