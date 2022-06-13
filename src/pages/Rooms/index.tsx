@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
 
+import axios from "axios";
+
 import Header from "../../components/Header";
 import Button from "../../components/Utils/Button";
 import Input from "../../components/Utils/Input";
@@ -17,8 +19,18 @@ export default function Rooms () {
     const [where, setWhere] = useState('');
     const [why, setWhy] = useState('');
 
-    const enviar = () => {
-        console.log( who, what, when, where, why );
+    const enviar = async () => {
+        const t = await axios.post('api/create', {
+            url: "https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg",
+            who, 
+            what, 
+            when, 
+            where, 
+            why
+        })
+
+        console.log(t)
+        
         setWho('');
         setWhat('');
         setWhen('');
