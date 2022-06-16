@@ -13,29 +13,18 @@ import { Wrapper } from "./style";
 
 export default function Rooms () {
 
-    const [who, setWho] = useState('');
-    const [what, setWhat] = useState('');
-    const [when, setWhen] = useState('');
-    const [where, setWhere] = useState('');
-    const [why, setWhy] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const [nickName, setNickName] = useState('');
+    const [roomCode, setRoomCode] = useState('');
 
-    const enviar = async () => {
-        const t = await axios.post('api/create', {
-            url: "https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg",
-            who, 
-            what, 
-            when, 
-            where, 
-            why
+    const createNewRoom = async () => {
+        const t = await axios.post('api/create_description', {
+            roomName,
+            roomCode
         })
-
-        console.log(t)
-        
-        setWho('');
-        setWhat('');
-        setWhen('');
-        setWhere('');
-        setWhy('');
+    }
+    const enterInRoom = () => {
+        console.log(nickName + "is in " + roomName)
     }
 
     return (
@@ -45,37 +34,32 @@ export default function Rooms () {
             <Header page="Rooms"/>
             <Wrapper>
                 <section>
-                    <img src="https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg" />
+                    <Input
+                        name="Nome da sala"
+                        placeholder="Digite o nome da sala"
+                        value={[roomName, setRoomName]}
+                    />
+                    <Input
+                        name="Código"
+                        placeholder="Digite o código secreto para criar a sala"
+                        value={[roomCode, setRoomCode]}
+                    />
+                    <Button onClick={() => createNewRoom()}>Criar</Button>
                 </section>
                 <section>
                     <Input
-                        value={[who, setWho]}
-                        name="Who"
-                        placeholder="Quem está na foto?"
+                        name="Nome da sala"
+                        placeholder="Digite o nome da sala"
+                        value={[roomName, setRoomName]}
                     />
                     <Input
-                        value={[what, setWhat]}
-                        name="What"
-                        placeholder="O que está acontecendo?"
+                        name="Nickname"
+                        placeholder="Digite o seu nome ou apelido"
+                        value={[nickName, setNickName]}
                     />
-                    <Input
-                        value={[when, setWhen]}
-                        name="When"
-                        placeholder="Em que momento está acontecendo?"
-                    />
-                    <Input
-                        value={[where, setWhere]}
-                        name="Where"
-                        placeholder="Descreva o local da imagem!"
-                    />
-                    <Input
-                        value={[why, setWhy]}
-                        name="Why"
-                        placeholder="Por que?"
-                    />
-                    <Button onClick={() => enviar()}>Enviar</Button>
+                    <Button onClick={() => enterInRoom()}>Entrar</Button>
                 </section>
-            </Wrapper>
+            </Wrapper> 
             <Footer />
         </>
     )

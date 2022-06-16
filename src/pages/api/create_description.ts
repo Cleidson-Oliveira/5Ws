@@ -8,16 +8,41 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { body } = req
+  const { body } = req;
   console.log(body)
   fauna.query(
-    q.Create(
-      q.Collection('5Ws_Descriptions'),
-      {
-        data: {
-          ...body
+    // q.Create(
+    //   q.Collection('5Ws_Descriptions'),
+    //   {
+    //     data: {
+    //       ...body
+    //     },
+    //   },
+    // )
+    q.If(
+      q.Not(
+        q.Exists(
+          q.Match(
+            q.Index('rooms_by_name'),
+            'teste'
+          )
+        )
+      ),
+      q.Create(
+        q.Collection('5Ws_Descriptions'),
+        {
+          data: {
+            ...body
+          },
         },
-      },
+      ),
+      q.Update(
+        q.Match(
+          q.Index('rooms_by_name'),
+          'teste'
+        ),
+        { data: { tags: ['welcome', 'short'] } }
+      )
     )
   )
   .then((ret) => console.log(ret))

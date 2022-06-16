@@ -11,6 +11,7 @@ export const Wrapper = styled.label`
         border-radius: 5px;
         border: 1px solid ${Colors.blueLight};
         padding-left: 10px;
+        margin-top: 3px;
     }
 
     & + label {
