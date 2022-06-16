@@ -18,7 +18,7 @@ export default function Rooms () {
     const [roomCode, setRoomCode] = useState('');
 
     const createNewRoom = async () => {
-        const t = await axios.post('api/create_description', {
+        const t = await axios.post('api/create_room', {
             roomName,
             roomCode
         })
