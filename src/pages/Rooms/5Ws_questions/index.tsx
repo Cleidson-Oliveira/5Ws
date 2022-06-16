@@ -38,7 +38,6 @@ export default function Questions () {
         const randomImage = await axios.get(
             'https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=QK0DOMNjfpYq4eBygRr6Iz1Lpt0RhsNdj4zEmS7b7eA'
         )
-        console.log(randomImage.data[0].urls.regular)
         return randomImage.data[0].urls.regular
     }
 
