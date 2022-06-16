@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
@@ -11,8 +11,17 @@ import Footer from "../../../components/Footer";
 import { GlobalStyle } from "../../../styles/Global";
 import { Wrapper } from "../style";
 
+interface Type {
+    urls: {
+        full: string
+    }
+}
+
 export default function Questions () {
 
+    //"https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg"
+
+    const [currentUrl, setCurrentUrl] = useState('');
     const [who, setWho] = useState('');
     const [what, setWhat] = useState('');
     const [when, setWhen] = useState('');
@@ -20,13 +29,24 @@ export default function Questions () {
     const [why, setWhy] = useState('');
     const [roomName, setRoomName] = useState('');
     const [nickName, setNickName] = useState('');
-    const [roomCode, setRoomCode] = useState('');
+
+    useEffect(() => {
+        let data = searchImage()
+    }, [])
+
+    const searchImage = async () => {
+        const randomImage = await axios.get(
+            'https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=QK0DOMNjfpYq4eBygRr6Iz1Lpt0RhsNdj4zEmS7b7eA'
+        )
+        console.log(randomImage.data[0].urls.regular)
+        return randomImage.data[0].urls.regular
+    }
 
     const enviar = async () => {
         const t = await axios.post('api/create_description', {
             roomName,
             nickName,
-            url: "https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg",
+            url: currentUrl,
             who, 
             what, 
             when, 
@@ -48,7 +68,7 @@ export default function Questions () {
             <Header page="Rooms"/>
             <Wrapper>
                 <section>
-                    <img src="https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg" />
+                    <img src={currentUrl} />
                 </section>
                 <section>
                     <Input
