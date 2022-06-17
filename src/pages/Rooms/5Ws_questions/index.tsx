@@ -33,10 +33,15 @@ export default function Questions () {
 
     useEffect(() => {
         searchImage();
+
+        const info = localStorage.getItem('fiveWs');
+        const infoJson = JSON.parse(info!)
+        
+        setRoomName(infoJson.roomName!);
+        setNickName(infoJson.nickName!);
     }, [])
 
     useEffect(() => {
-        console.log(urls)
         setCurrentUrl(urls[0])
     },[urls])
     
@@ -52,7 +57,18 @@ export default function Questions () {
     }
 
     const enviar = async () => {
-        const t = await axios.post('api/create_description', {
+        // const t = await axios.post('api/create_description', {
+        //     roomName,
+        //     nickName,
+        //     url: currentUrl,
+        //     who, 
+        //     what, 
+        //     when, 
+        //     where, 
+        //     why
+        // })
+
+        console.log({
             roomName,
             nickName,
             url: currentUrl,
