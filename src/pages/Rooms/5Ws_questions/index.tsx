@@ -11,9 +11,9 @@ import Footer from "../../../components/Footer";
 import { GlobalStyle } from "../../../styles/Global";
 import { Wrapper } from "../style";
 
-interface Type {
+type Urls = {
     urls: {
-        full: string
+        regular: string
     }
 }
 
@@ -21,6 +21,7 @@ export default function Questions () {
 
     //"https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg"
 
+    const [urls, setUrls] = useState([])
     const [currentUrl, setCurrentUrl] = useState('');
     const [who, setWho] = useState('');
     const [what, setWhat] = useState('');
@@ -31,14 +32,23 @@ export default function Questions () {
     const [nickName, setNickName] = useState('');
 
     useEffect(() => {
-        let data = searchImage()
+        searchImage();
     }, [])
 
+    useEffect(() => {
+        console.log(urls)
+        setCurrentUrl(urls[0])
+    },[urls])
+    
     const searchImage = async () => {
+        const url = process.env.UNSPLASH_URL!
         const randomImage = await axios.get(
             'https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=QK0DOMNjfpYq4eBygRr6Iz1Lpt0RhsNdj4zEmS7b7eA'
-        )
-        return randomImage.data[0].urls.regular
+        );
+        setUrls(() => {
+            const urls = randomImage.data.map((url: Urls) => url.urls.regular)
+            return urls;
+        })
     }
 
     const enviar = async () => {

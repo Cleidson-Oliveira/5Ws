@@ -1,5 +1,6 @@
-import Head from "next/head";
 import { useState } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 import axios from "axios";
 
@@ -13,6 +14,8 @@ import { Wrapper } from "./style";
 
 export default function Rooms () {
 
+    const router = useRouter()
+
     const [roomName, setRoomName] = useState('');
     const [nickName, setNickName] = useState('');
     const [roomCode, setRoomCode] = useState('');
@@ -22,9 +25,11 @@ export default function Rooms () {
             roomName,
             roomCode
         })
+        router.push("/Rooms/Dashboard");
     }
     const enterInRoom = () => {
-        console.log(nickName + "is in " + roomName)
+        console.log(nickName + "is in " + roomName);
+        router.push("/Rooms/5Ws_questions");
     }
 
     return (

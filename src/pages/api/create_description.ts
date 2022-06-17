@@ -11,14 +11,6 @@ export default function handler(
   const { body } = req;
   console.log(body)
   fauna.query(
-    // q.Create(
-    //   q.Collection('5Ws_Descriptions'),
-    //   {
-    //     data: {
-    //       ...body
-    //     },
-    //   },
-    // )
     q.If(
       q.Not(
         q.Exists(
@@ -56,20 +48,20 @@ export default function handler(
   res.status(201).json({ success: true })
 }
 
-const postSchema = {
-  roomCode: String,
-  nickName: String,
-  descriptions: {
-    url: String,
-    who: String,
-    what: String,
-    when: String,
-    where: String,
-    why: String,
-    coments: String
-  },
-  createdAt: {
-      type: Date,
-      default: Date.now,
-  }
-}
+// const postSchema = {
+//   roomCode: String,
+//   nickName: String,
+//   descriptions: {
+//     url: String,
+//     who: String,
+//     what: String,
+//     when: String,
+//     where: String,
+//     why: String,
+//     coments: String
+//   },
+//   createdAt: {
+//       type: Date,
+//       default: Date.now,
+//   }
+// }
