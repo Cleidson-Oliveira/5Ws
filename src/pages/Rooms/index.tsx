@@ -12,6 +12,7 @@ import Footer from "../../components/Footer";
 import { GlobalStyle } from "../../styles/Global";
 import { Wrapper } from "./style";
 import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
+import { Title } from "../../components/Utils/Title/intex";
 
 export default function Rooms () {
 
@@ -42,6 +43,7 @@ export default function Rooms () {
             <Header page="Rooms"/>
             <Wrapper>
                 <section>
+                    <Title>Crie uma sala</Title>
                     <Input
                         name="Nome da sala"
                         placeholder="Digite o nome da sala"
@@ -56,6 +58,7 @@ export default function Rooms () {
                 </section>
                 <VerticalSeparator />
                 <section>
+                    <Title>Entre em uma sala</Title>
                     <Input
                         name="Nome da sala"
                         placeholder="Digite o nome da sala"
