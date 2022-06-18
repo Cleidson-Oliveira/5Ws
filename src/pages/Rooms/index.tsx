@@ -11,18 +11,20 @@ import Footer from "../../components/Footer";
 
 import { GlobalStyle } from "../../styles/Global";
 import { Wrapper } from "./style";
+import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
 
 export default function Rooms () {
 
     const router = useRouter()
 
+    const [createRoomName, setCreateRoomName] = useState('');
+    const [roomCode, setRoomCode] = useState('');
     const [roomName, setRoomName] = useState('');
     const [nickName, setNickName] = useState('');
-    const [roomCode, setRoomCode] = useState('');
 
     const createNewRoom = async () => {
         const t = await axios.post('api/create_room', {
-            roomName,
+            createRoomName,
             roomCode
         })
         localStorage.setItem('fiveWs', JSON.stringify({roomName}))
@@ -43,7 +45,7 @@ export default function Rooms () {
                     <Input
                         name="Nome da sala"
                         placeholder="Digite o nome da sala"
-                        value={[roomName, setRoomName]}
+                        value={[createRoomName, setCreateRoomName]}
                     />
                     <Input
                         name="Código"
@@ -52,6 +54,7 @@ export default function Rooms () {
                     />
                     <Button onClick={() => createNewRoom()}>Criar</Button>
                 </section>
+                <VerticalSeparator />
                 <section>
                     <Input
                         name="Nome da sala"
