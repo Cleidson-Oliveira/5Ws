@@ -2,7 +2,6 @@ import { Wrapper } from "./style";
 import Buttons from "../Button";
 
 import { BsArrowRepeat } from 'react-icons/bs'
-import { SetStateAction } from "react";
 
 const { RoundedButton } = Buttons;
 
@@ -14,7 +13,10 @@ export default function Image ({ src, onChangeCurrentUrl }: ImageProps) {
     return (
         <Wrapper>
             <img src={src} />
-            <RoundedButton onClick={() => onChangeCurrentUrl()}>
+            <RoundedButton 
+                onClick={() => onChangeCurrentUrl()}
+                title='Próxima imagem'
+            >
                 <BsArrowRepeat />
             </RoundedButton>
         </Wrapper>

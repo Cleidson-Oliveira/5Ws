@@ -48,7 +48,7 @@ export default function Questions ({ urls }: QuestionsProps) {
     const handleCurrentUrl = () => {
         setCurrentUrl(prevState => {
             let itemTarget = prevState;
-            urls.forEach((v, i) => {
+            urls.forEach((v, i) => {                
                 if (v == prevState) {
                     itemTarget = urls[i + 1];
                 }
