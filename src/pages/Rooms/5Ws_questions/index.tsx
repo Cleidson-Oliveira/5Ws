@@ -45,6 +45,18 @@ export default function Questions ({ urls }: QuestionsProps) {
         setCurrentUrl(urls[0])
     },[urls])
 
+    const handleCurrentUrl = () => {
+        setCurrentUrl(prevState => {
+            let itemTarget = prevState;
+            urls.forEach((v, i) => {
+                if (v == prevState) {
+                    itemTarget = urls[i + 1];
+                }
+            })
+            return itemTarget;
+        })
+    }
+
     const enviar = async () => {
         const t = await axios.post('/api/create_description', {
             roomName,
@@ -71,7 +83,7 @@ export default function Questions ({ urls }: QuestionsProps) {
             <Header page="Rooms"/>
             <Wrapper>
                 <section>
-                    <Image src={currentUrl} />
+                    <Image src={currentUrl} onChangeCurrentUrl={handleCurrentUrl}/>
                 </section>
                 <section>
                     <Input
