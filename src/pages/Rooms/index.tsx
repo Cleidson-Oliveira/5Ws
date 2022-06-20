@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import Header from "../../components/Header";
-import Button from "../../components/Utils/Button";
+import Buttons from "../../components/Utils/Button";
 import Input from "../../components/Utils/Input";
 import Footer from "../../components/Footer";
 
@@ -54,7 +54,7 @@ export default function Rooms () {
                         placeholder="Digite o código secreto para criar a sala"
                         value={[roomCode, setRoomCode]}
                     />
-                    <Button onClick={() => createNewRoom()}>Criar</Button>
+                    <Buttons.Button onClick={() => createNewRoom()}>Criar</Buttons.Button>
                 </section>
                 <VerticalSeparator />
                 <section>
@@ -69,7 +69,7 @@ export default function Rooms () {
                         placeholder="Digite o seu nome ou apelido"
                         value={[nickName, setNickName]}
                     />
-                    <Button onClick={() => enterInRoom()}>Entrar</Button>
+                    <Buttons.Button onClick={() => enterInRoom()}>Entrar</Buttons.Button>
                 </section>
             </Wrapper> 
             <Footer />

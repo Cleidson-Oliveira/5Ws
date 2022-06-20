@@ -21,4 +21,15 @@ const Button = styled.button`
     }
 `;
 
-export default Button
+const RoundedButton = styled(Button)`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+`;
+
+const Buttons = {
+    Button,
+    RoundedButton
+}
+
+export default Buttons

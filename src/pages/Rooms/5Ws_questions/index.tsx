@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Header from "../../../components/Header";
-import Button from "../../../components/Utils/Button";
+import Buttons from "../../../components/Utils/Button";
 import Input from "../../../components/Utils/Input";
 import Footer from "../../../components/Footer";
 
 import { GlobalStyle } from "../../../styles/Global";
 import { Wrapper } from "../style";
+import Image from "../../../components/Utils/ImageWillBeDescribed";
 
 interface QuestionsProps {
     urls: string[]
@@ -70,7 +71,7 @@ export default function Questions ({ urls }: QuestionsProps) {
             <Header page="Rooms"/>
             <Wrapper>
                 <section>
-                    <img src={currentUrl} />
+                    <Image src={currentUrl} />
                 </section>
                 <section>
                     <Input
@@ -98,7 +99,7 @@ export default function Questions ({ urls }: QuestionsProps) {
                         name="Why"
                         placeholder="Por que?"
                     />
-                    <Button onClick={() => enviar()}>Enviar</Button>
+                    <Buttons.Button onClick={() => enviar()}>Enviar</Buttons.Button>
                 </section>
             </Wrapper>
             <Footer />
