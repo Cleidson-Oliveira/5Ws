@@ -11,7 +11,7 @@ export default function Questions () {
     const [roomName, setRoomName] = useState('')
 
     useEffect(() => {
-        const info = localStorage.getItem('fiveWs');
+        const info = sessionStorage.getItem('fiveWs');
         const infoJson = JSON.parse(info!)
         
         setRoomName(infoJson.roomName!);

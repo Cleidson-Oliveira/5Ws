@@ -28,11 +28,11 @@ export default function Rooms () {
             createRoomName,
             roomCode
         })
-        localStorage.setItem('fiveWs', JSON.stringify({roomName}))
+        sessionStorage.setItem('fiveWs', JSON.stringify({roomName}))
         router.push("/Rooms/Dashboard");
     }
     const enterInRoom = () => {
-        localStorage.setItem('fiveWs', JSON.stringify({roomName, nickName}));
+        sessionStorage.setItem('fiveWs', JSON.stringify({roomName, nickName}));
         router.push("/Rooms/5Ws_questions");
     }
 
