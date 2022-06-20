@@ -11,17 +11,18 @@ import Footer from "../../../components/Footer";
 import { GlobalStyle } from "../../../styles/Global";
 import { Wrapper } from "../style";
 
+interface QuestionsProps {
+    urls: string[]
+}
+
 type Urls = {
     urls: {
         regular: string
     }
 }
 
-export default function Questions () {
+export default function Questions ({ urls }: QuestionsProps) {
 
-    //"https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg"
-
-    const [urls, setUrls] = useState([])
     const [currentUrl, setCurrentUrl] = useState('');
     const [who, setWho] = useState('');
     const [what, setWhat] = useState('');
@@ -32,8 +33,6 @@ export default function Questions () {
     const [nickName, setNickName] = useState('');
 
     useEffect(() => {
-        searchImage();
-
         const info = localStorage.getItem('fiveWs');
         const infoJson = JSON.parse(info!)
         
@@ -44,17 +43,6 @@ export default function Questions () {
     useEffect(() => {
         setCurrentUrl(urls[0])
     },[urls])
-    
-    const searchImage = async () => {
-        const url = process.env.UNSPLASH_URL!
-        const randomImage = await axios.get(
-            'https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=QK0DOMNjfpYq4eBygRr6Iz1Lpt0RhsNdj4zEmS7b7eA'
-        );
-        setUrls(() => {
-            const urls = randomImage.data.map((url: Urls) => url.urls.regular)
-            return urls;
-        })
-    }
 
     const enviar = async () => {
         const t = await axios.post('/api/create_description', {
@@ -116,4 +104,17 @@ export default function Questions () {
             <Footer />
         </>
     )
+}
+
+export async function getStaticProps() {
+    const randomImage = await axios.get(
+        `https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=${process.env.UNSPLASH_KEY!}`
+    );
+    
+    const urls = randomImage.data.map((url: Urls) => url.urls.regular);
+
+    return {
+      props: { urls },
+      revalidate: 60 * 60 * 24, // 24 Horas
+    }
 }
