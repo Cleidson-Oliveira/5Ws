@@ -13,6 +13,7 @@ import { GlobalStyle } from "../../styles/Global";
 import { Wrapper } from "./style";
 import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
 import { Title } from "../../components/Utils/Title/intex";
+import OAuthButton from "../../components/Utils/OAuthButton";
 
 export default function Rooms () {
 
@@ -55,6 +56,7 @@ export default function Rooms () {
                         value={[roomCode, setRoomCode]}
                     />
                     <Buttons.Button onClick={() => createNewRoom()}>Criar</Buttons.Button>
+                    <OAuthButton />
                 </section>
                 <VerticalSeparator />
                 <section>

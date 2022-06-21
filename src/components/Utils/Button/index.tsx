@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { Colors } from "../../../styles/Colors";
 
 const Button = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
     height: 35px;
     border-radius: 5px;
@@ -18,6 +21,10 @@ const Button = styled.button`
         background-color: ${Colors.blue4};
         box-shadow: ${Colors.blue4} 0px 0px 10px 0px;
         border: none;
+    }
+
+    svg {
+        margin-right: 15px;
     }
 `;
 
