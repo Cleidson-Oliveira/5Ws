@@ -7,14 +7,21 @@ export default NextAuth({
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            authorization: {
-                params: {
-                    prompt: "consent",
-                    access_type: "offline",
-                    response_type: "code"
-                }
-            }
+            // authorization: {
+            //     params: {
+            //         prompt: "consent",
+            //         access_type: "offline",
+            //         response_type: "code"
+            //     }
+            // }
         })
         // ...add more providers here
     ],
+    session: {
+        maxAge: 30 * 24 * 60 * 60,  // 30 days
+        updateAge: 24 * 60 * 60,    // 24 hours
+    },
+    pages: {
+        signIn: '/auth/signin',
+    }
 })

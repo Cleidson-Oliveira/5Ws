@@ -1,16 +1,17 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+
 import Buttons from "../Button";
-import { FcGoogle } from "react-icons/fc";
 
 export default function OAuthButton() {
+
     const { data: session } = useSession();
+
     if (session) {
         return (
         <>
             {/* Signed in as {session.user?.name} */}
             <Buttons.Button onClick={() => signOut()}>
-                <FcGoogle />
-                Sign out
+                Sign Out
             </Buttons.Button>
         </>
         )
@@ -18,10 +19,8 @@ export default function OAuthButton() {
     return (
         <>
             <Buttons.Button onClick={() => signIn()}>
-                <FcGoogle />
-                Sign in with Google
+                Sign In
             </Buttons.Button>
         </>
-        
     )
 }

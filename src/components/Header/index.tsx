@@ -23,7 +23,9 @@ export default function Header ({ page }: HeaderProps) {
                     <li className={page == "Contact" ? "active" : ""}>
                         <Link href={"/Contact"}>Contato</Link>
                     </li>
-
+                    <li className="signin">
+                        <Link href={"/auth/signin"}>Sign In</Link>
+                    </li>
                 </ul>
             </nav>
         </Wrapper>

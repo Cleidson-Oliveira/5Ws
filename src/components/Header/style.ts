@@ -27,12 +27,23 @@ export const Wrapper = styled.header`
                 padding: 10px 20px;
             }
 
+            &.signin {
+                color: white;
+                background-color: green;
+                transition: all .3s ease;
+
+                :hover {
+                    background-color: white;
+                    color: green;
+                }
+            }
+
             &:hover, &.active {
                 color: ${Colors.color1};
                 background-color: ${Colors.color3};
                 transition: all .3s ease;
-                /* box-shadow: ${Colors.color2} 4px 4px 3px 0px; */
             }
+
         }
     }
 `;
