@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useSession} from "next-auth/react";
 
 import axios from "axios";
 
@@ -17,7 +18,8 @@ import OAuthButton from "../../components/Utils/OAuthButton";
 
 export default function Rooms () {
 
-    const router = useRouter()
+    const router = useRouter();
+    const { data: session } = useSession();
 
     const [createRoomName, setCreateRoomName] = useState('');
     const [roomCode, setRoomCode] = useState('');
@@ -37,44 +39,56 @@ export default function Rooms () {
         router.push("/Rooms/5Ws_questions");
     }
 
+    useEffect(() => {
+        if (session?.user == null || session?.user == undefined) {
+            router.push("/auth/signin");
+        }
+    }, [session])
+
+    if(session) {
+        return (
+            <>
+                <Head><title>5Ws | Salas</title></Head>
+                <GlobalStyle />
+                <Header page="Rooms"/>
+                <Wrapper>
+                    <section>
+                        <Title>Crie uma sala</Title>
+                        <Input
+                            name="Nome da sala"
+                            placeholder="Digite o nome da sala"
+                            value={[createRoomName, setCreateRoomName]}
+                        />
+                        <Input
+                            name="Código"
+                            placeholder="Digite o código secreto para criar a sala"
+                            value={[roomCode, setRoomCode]}
+                        />
+                        <Buttons.Button onClick={() => createNewRoom()}>Criar</Buttons.Button>
+                        <OAuthButton />
+                    </section>
+                    <VerticalSeparator />
+                    <section>
+                        <Title>Entre em uma sala</Title>
+                        <Input
+                            name="Nome da sala"
+                            placeholder="Digite o nome da sala"
+                            value={[roomName, setRoomName]}
+                        />
+                        <Input
+                            name="Nickname"
+                            placeholder="Digite o seu nome ou apelido"
+                            value={[nickName, setNickName]}
+                        />
+                        <Buttons.Button onClick={() => enterInRoom()}>Entrar</Buttons.Button>
+                    </section>
+                </Wrapper> 
+                <Footer />
+            </>
+        )
+    }
+
     return (
-        <>
-            <Head><title>5Ws | Salas</title></Head>
-            <GlobalStyle />
-            <Header page="Rooms"/>
-            <Wrapper>
-                <section>
-                    <Title>Crie uma sala</Title>
-                    <Input
-                        name="Nome da sala"
-                        placeholder="Digite o nome da sala"
-                        value={[createRoomName, setCreateRoomName]}
-                    />
-                    <Input
-                        name="Código"
-                        placeholder="Digite o código secreto para criar a sala"
-                        value={[roomCode, setRoomCode]}
-                    />
-                    <Buttons.Button onClick={() => createNewRoom()}>Criar</Buttons.Button>
-                    <OAuthButton />
-                </section>
-                <VerticalSeparator />
-                <section>
-                    <Title>Entre em uma sala</Title>
-                    <Input
-                        name="Nome da sala"
-                        placeholder="Digite o nome da sala"
-                        value={[roomName, setRoomName]}
-                    />
-                    <Input
-                        name="Nickname"
-                        placeholder="Digite o seu nome ou apelido"
-                        value={[nickName, setNickName]}
-                    />
-                    <Buttons.Button onClick={() => enterInRoom()}>Entrar</Buttons.Button>
-                </section>
-            </Wrapper> 
-            <Footer />
-        </>
+        <p>Loading...</p>
     )
 }

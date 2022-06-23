@@ -1,6 +1,8 @@
 import { BuiltInProviderType } from "next-auth/providers";
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from "next-auth/react";
+import { ClientSafeProvider, getProviders, LiteralUnion, signIn, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -14,6 +16,15 @@ interface SignInProps {
     providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>
 }
 export default function SignIn({ providers }: SignInProps) {
+
+    const router = useRouter();
+    const { data: session } = useSession();
+
+    useEffect(()=>{
+        if (session?.user) {
+            router.push("/Rooms");
+        }
+    }, [session])
 
     return (
         <>
