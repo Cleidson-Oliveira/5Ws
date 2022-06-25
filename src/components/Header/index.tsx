@@ -1,11 +1,17 @@
-import Link from "next/link"
-import { Wrapper } from "./style"
+import Link from "next/link";
+import { signOut, useSession} from "next-auth/react";
+
+import { Wrapper } from "./style";
+import { Avatar } from "../Utils/Avatar";
 
 interface HeaderProps {
     page: string,
 }
 
 export default function Header ({ page }: HeaderProps) {
+
+    const { data: session } = useSession();
+
     return (
         <Wrapper>
             <svg width="63" height="24" viewBox="0 0 63 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,8 +29,20 @@ export default function Header ({ page }: HeaderProps) {
                     <li className={page == "Contact" ? "active" : ""}>
                         <Link href={"/Contact"}>Contato</Link>
                     </li>
-                    <li className="signin">
-                        <Link href={"/auth/signin"}>Sign In</Link>
+                    <li className={session ? "signout" : "signin"}>
+                        {
+                            session 
+                            ? (<Avatar 
+                                avatarUrl={session?.user?.image!}
+                                onClick={() => signOut()}
+                                title="Sign Out"
+                            />)
+                            : (<Link
+                                href={"/auth/signin"}
+                            >
+                                Sign In
+                            </Link>)
+                        }
                     </li>
                 </ul>
             </nav>

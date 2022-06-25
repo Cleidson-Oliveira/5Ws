@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession} from "next-auth/react";
 
@@ -9,17 +9,17 @@ import Header from "../../components/Header";
 import Buttons from "../../components/Utils/Button";
 import Input from "../../components/Utils/Input";
 import Footer from "../../components/Footer";
+import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
+import { Title } from "../../components/Utils/Title/intex";
 
 import { GlobalStyle } from "../../styles/Global";
 import { Wrapper } from "./style";
-import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
-import { Title } from "../../components/Utils/Title/intex";
-import OAuthButton from "../../components/Utils/OAuthButton";
 
 export default function Rooms () {
 
     const router = useRouter();
     const { data: session } = useSession();
+    console.log(session);
 
     const [createRoomName, setCreateRoomName] = useState('');
     const [roomCode, setRoomCode] = useState('');
@@ -31,11 +31,11 @@ export default function Rooms () {
             createRoomName,
             roomCode
         })
-        sessionStorage.setItem('fiveWs', JSON.stringify({roomName}))
+        // sessionStorage.setItem('fiveWs', JSON.stringify({roomName}))
         router.push("/Rooms/Dashboard");
     }
     const enterInRoom = () => {
-        sessionStorage.setItem('fiveWs', JSON.stringify({roomName, nickName}));
+        // sessionStorage.setItem('fiveWs', JSON.stringify({roomName, nickName}));
         router.push("/Rooms/5Ws_questions");
     }
 
@@ -65,7 +65,6 @@ export default function Rooms () {
                             value={[roomCode, setRoomCode]}
                         />
                         <Buttons.Button onClick={() => createNewRoom()}>Criar</Buttons.Button>
-                        <OAuthButton />
                     </section>
                     <VerticalSeparator />
                     <section>

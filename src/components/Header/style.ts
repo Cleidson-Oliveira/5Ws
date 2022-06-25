@@ -15,6 +15,7 @@ export const Wrapper = styled.header`
     ul {
         display: flex;
         flex-direction: row;
+        align-items: center;
         gap: 10px;
 
         li {
@@ -35,6 +36,14 @@ export const Wrapper = styled.header`
                 :hover {
                     background-color: white;
                     color: green;
+                }
+            }
+
+            &.signout {
+                background: transparent;
+
+                :hover {
+                    background-color: transparent;
                 }
             }
 
