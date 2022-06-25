@@ -43,7 +43,7 @@ export default function Rooms () {
 
     useEffect(() => {
         if (session?.user == null || session?.user == undefined) {
-            // router.push("/auth/signin");
+            router.push("/auth/signin");
         }
     }, [session])
 
