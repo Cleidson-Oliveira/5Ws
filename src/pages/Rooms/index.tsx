@@ -8,12 +8,14 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Buttons from "../../components/Utils/Button";
 import Input from "../../components/Utils/Input";
+import Loading from "../../components/Utils/Loading";
 import Footer from "../../components/Footer";
 import { VerticalSeparator } from "../../components/Utils/Separator/insdex";
 import { Title } from "../../components/Utils/Title/intex";
 
 import { GlobalStyle } from "../../styles/Global";
 import { Wrapper } from "./style";
+
 
 export default function Rooms () {
 
@@ -41,14 +43,14 @@ export default function Rooms () {
 
     useEffect(() => {
         if (session?.user == null || session?.user == undefined) {
-            router.push("/auth/signin");
+            // router.push("/auth/signin");
         }
     }, [session])
 
     if(session) {
         return (
             <>
-                <Head><title>5Ws | Salas</title></Head>
+                <Head><title>5Ws | Dashboard</title></Head>
                 <GlobalStyle />
                 <Header page="Rooms"/>
                 <Wrapper>
@@ -88,6 +90,12 @@ export default function Rooms () {
     }
 
     return (
-        <p>Loading...</p>
+        <>
+            <Head><title>5Ws | Dashboard</title></Head>
+            <GlobalStyle />
+            <Header page="Rooms"/>
+            <Loading />
+            <Footer />
+        </>
     )
 }
