@@ -28,7 +28,7 @@ export default function SignIn({ providers }: SignInProps) {
 
     return (
         <>
-            <Head><title>5Ws | Salas</title></Head>
+            <Head><title>5Ws | Sign In</title></Head>
             <GlobalStyle />
             <Header page="SignIn"/>
             <Wrapper>

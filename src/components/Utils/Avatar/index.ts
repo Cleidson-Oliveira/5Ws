@@ -11,7 +11,7 @@ export const Avatar = styled.button<AvatarProps>`
     border-radius: 50%;
     background-image: url(${props => props.avatarUrl});
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
     border: ${Colors.color1} 3px solid;

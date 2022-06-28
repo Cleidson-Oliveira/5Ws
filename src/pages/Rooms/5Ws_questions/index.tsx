@@ -9,9 +9,8 @@ import Input from "../../../components/Utils/Input";
 import Footer from "../../../components/Footer";
 
 import { GlobalStyle } from "../../../styles/Global";
-import { Wrapper } from "../style";
+import { Wrapper } from "./style";
 import Image from "../../../components/Utils/ImageWillBeDescribed";
-import Controls from "../../../components/Controls";
 
 interface QuestionsProps {
     urls: string[]
@@ -83,7 +82,6 @@ export default function Questions ({ urls }: QuestionsProps) {
             <Head><title>5Ws | Salas</title></Head>
             <GlobalStyle />
             <Header page="Rooms"/>
-            <Controls />
             <Wrapper>
                 <section>
                     <Image src={currentUrl} onChangeCurrentUrl={handleCurrentUrl}/>
