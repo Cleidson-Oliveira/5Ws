@@ -26,7 +26,7 @@ export const AsideContent = styled.div`
 export const MainContent = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     min-width: 65vw;
     padding: 3rem;
     box-sizing: border-box;

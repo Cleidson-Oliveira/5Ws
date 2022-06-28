@@ -82,7 +82,7 @@ export default function Dashboard () {
                 </section>)}
 
                 <section>
-                    <SubTitle>Veja aqui suas salas criadas</SubTitle>
+                    <SubTitle>Veja aqui suas salas</SubTitle>
                 </section>
 
                 <section>
