@@ -58,7 +58,7 @@ export default function Questions ({ urls }: QuestionsProps) {
     }
 
     const enviar = async () => {
-        const t = await axios.post('/api/create_description', {
+        const t = await axios.post('/api/descriptions', {
             roomName,
             nickName,
             url: currentUrl,

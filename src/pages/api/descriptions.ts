@@ -9,7 +9,7 @@ export default function handler(
   res: NextApiResponse
 ) {
   const { body } = req;
-  console.log(body)
+  
   fauna.query(
     q.If(
       q.Not(

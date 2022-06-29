@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 import axios from "axios";
 
 import { Wrapper, AsideContent, MainContent } from "./style";
-import { VerticalSeparator } from "../Utils/Separator/insdex";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
 import Buttons from "../Utils/Button";
@@ -17,6 +16,7 @@ export default function Dashboard () {
     const router = useRouter();
     const {data: session} = useSession();
 
+    const [roomsList, setRoomsList] = useState('');
     const [newRoomName, setNewRoomName] = useState('');
     const [roomName, setRoomName] = useState('');
     const [nickName, setNickName] = useState('');
@@ -24,15 +24,26 @@ export default function Dashboard () {
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
 
     const createNewRoom = async () => {
-        const t = await axios.post('api/create_room', {
+        const t = await axios.post('api/rooms', {
             name: session?.user?.name,
             newRoomName,
         })
     }
     
+    const getUserRooms = async () => {
+        const t = await axios.get('api/rooms');
+        console.log(t)
+        return t
+    }
+    
     const enterInRoom = () => {
         router.push("/Rooms/5Ws_questions");
     }
+
+    useEffect(() => {
+        let roomsData = getUserRooms();
+        // console.log(roomsData)
+    }, [])
 
     return (
         <Wrapper>

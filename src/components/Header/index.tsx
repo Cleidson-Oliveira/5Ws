@@ -3,6 +3,7 @@ import { signOut, useSession} from "next-auth/react";
 
 import { Wrapper } from "./style";
 import { Avatar } from "../Utils/Avatar";
+import { useEffect, useState } from "react";
 
 interface HeaderProps {
     page: string,
@@ -11,6 +12,14 @@ interface HeaderProps {
 export default function Header ({ page }: HeaderProps) {
 
     const { data: session } = useSession();
+
+    const [avatarImage, setAvatarImage] = useState('');
+
+    useEffect(() => {
+        if (session?.user?.image != undefined && session?.user?.image != null) {
+            setAvatarImage(session?.user?.image)
+        }
+    }, [session])
 
     return (
         <Wrapper>
@@ -33,7 +42,7 @@ export default function Header ({ page }: HeaderProps) {
                         {
                             session 
                             ? (<Avatar 
-                                avatarUrl={session?.user?.image!}
+                                avatarUrl={avatarImage}
                                 onClick={() => signOut()}
                                 title="Sign Out"
                             />)
