@@ -3,12 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { fauna } from "../../../services/faunadb";
 import { query as q} from 'faunadb';
 
-interface ReadedRoomData {
-    data: {
-        data: []
-    }
-}
-
 function HandlerGetRooms (req: NextApiRequest, res: NextApiResponse) {
     const { body } = req;
     return fauna.query(
