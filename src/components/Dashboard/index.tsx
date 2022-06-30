@@ -11,12 +11,19 @@ import Buttons from "../Utils/Button";
 
 const { Button } = Buttons;
 
+interface RoomsListType {
+    data: {
+        userName: string,
+        roomName: string
+    }
+}
+
 export default function Dashboard () {
 
     const router = useRouter();
     const {data: session} = useSession();
 
-    const [roomsList, setRoomsList] = useState('');
+    const [roomsList, setRoomsList] = useState<RoomsListType[]>([]);
     const [newRoomName, setNewRoomName] = useState('');
     const [roomName, setRoomName] = useState('');
     const [nickName, setNickName] = useState('');
@@ -24,16 +31,26 @@ export default function Dashboard () {
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
 
     const createNewRoom = async () => {
-        const t = await axios.post('api/rooms', {
-            name: session?.user?.name,
-            newRoomName,
+        const userName = session?.user?.name as string;
+        const t = await axios.post('api/rooms/create', {
+            userName,
+            roomName: newRoomName,
         })
+        
+        setRoomsList(prevState => ([...prevState, 
+            {data: {
+                userName,
+                roomName: newRoomName,
+            }}
+        ]))
     }
     
     const getUserRooms = async () => {
-        const t = await axios.get('api/rooms');
-        console.log(t)
-        return t
+        const rooms = await axios.post('api/rooms/read', {
+            userName: session?.user?.name,
+        });
+        console.log(rooms.data.data)
+        setRoomsList(rooms.data.data)
     }
     
     const enterInRoom = () => {
@@ -41,8 +58,7 @@ export default function Dashboard () {
     }
 
     useEffect(() => {
-        let roomsData = getUserRooms();
-        // console.log(roomsData)
+        getUserRooms();     
     }, [])
 
     return (
@@ -94,6 +110,9 @@ export default function Dashboard () {
 
                 <section>
                     <SubTitle>Veja aqui suas salas</SubTitle>
+                    {roomsList.length > 0 && roomsList.map((room) => (
+                        <p>{room.data.roomName}</p>
+                    ))}
                 </section>
 
                 <section>
