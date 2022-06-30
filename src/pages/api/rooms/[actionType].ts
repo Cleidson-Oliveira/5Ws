@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import HandlerGetRooms from "./read";
-import HandlerCreateRooms from "./create";
+import HandlerGetAllRooms from "./actions/readAll";
+import HandlerGetRoom from "./actions/readOne";
+import HandlerCreateRooms from "./actions/create";
+
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { actionType } = req.query;
@@ -11,8 +13,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             HandlerCreateRooms(req, res);            
             break;
 
-        case "read":
-            HandlerGetRooms(req, res);
+        case "readAll":
+            HandlerGetAllRooms(req, res);
+            break;
+        
+        case "verifyIfExistRoom":
+            HandlerGetRoom(req, res)
             break;
 
         default:

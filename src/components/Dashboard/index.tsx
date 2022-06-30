@@ -26,7 +26,6 @@ export default function Dashboard () {
     const [roomsList, setRoomsList] = useState<RoomsListType[]>([]);
     const [newRoomName, setNewRoomName] = useState('');
     const [roomName, setRoomName] = useState('');
-    const [nickName, setNickName] = useState('');
     const [showNewRoom, setShowNewRoom] = useState(false);
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
 
@@ -46,15 +45,19 @@ export default function Dashboard () {
     }
     
     const getUserRooms = async () => {
-        const rooms = await axios.post('api/rooms/read', {
+        const rooms = await axios.post('api/rooms/readAll', {
             userName: session?.user?.name,
         });
-        console.log(rooms.data.data)
         setRoomsList(rooms.data.data)
     }
     
-    const enterInRoom = () => {
-        router.push("/Rooms/5Ws_questions");
+    const enterInRoom = async () => {
+        const rooms = await axios.post('api/rooms/verifyIfExistRoom', {
+            roomName
+        })
+        if (rooms.data.roomExistes) {
+            router.push(`/Rooms/app5Ws/${roomName}`);
+        }
     }
 
     useEffect(() => {
@@ -99,11 +102,6 @@ export default function Dashboard () {
                         name="Nome da sala"
                         placeholder="Digite o nome da sala"
                         value={[roomName, setRoomName]}
-                    />
-                    <Input
-                        name="Nickname"
-                        placeholder="Digite o seu nome ou apelido"
-                        value={[nickName, setNickName]}
                     />
                     <Button onClick={() => enterInRoom()}>Entrar</Button>
                 </section>)}

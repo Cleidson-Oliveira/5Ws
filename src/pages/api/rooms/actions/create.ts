@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { fauna } from "../../../services/faunadb";
+import { fauna } from "../../../../services/faunadb";
 import { query as q} from 'faunadb';
 
 function HandlerCreateRoom ( req: NextApiRequest, res: NextApiResponse ) {

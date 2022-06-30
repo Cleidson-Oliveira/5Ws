@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { fauna } from "../../../services/faunadb";
+import { fauna } from "../../../../services/faunadb";
 import { query as q} from 'faunadb';
 
-function HandlerGetRooms (req: NextApiRequest, res: NextApiResponse) {
+function HandlerGetAllRooms (req: NextApiRequest, res: NextApiResponse) {
     const { body } = req;
     return fauna.query(
         q.Map(
@@ -28,4 +28,4 @@ function HandlerGetRooms (req: NextApiRequest, res: NextApiResponse) {
     ))
 }
 
-export default HandlerGetRooms;
+export default HandlerGetAllRooms;

@@ -1,7 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { fauna } from "../../../services/faunadb";
+import { fauna } from "../../../../services/faunadb";
 import { query as q} from 'faunadb';
 
 function HandlerCreateDescription (

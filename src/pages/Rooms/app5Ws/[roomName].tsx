@@ -11,6 +11,8 @@ import Footer from "../../../components/Footer";
 import { GlobalStyle } from "../../../styles/Global";
 import { Wrapper } from "./style";
 import Image from "../../../components/Utils/ImageWillBeDescribed";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface QuestionsProps {
     urls: string[]
@@ -24,22 +26,16 @@ type Urls = {
 
 export default function Questions ({ urls }: QuestionsProps) {
 
+    const router = useRouter();
+    const { roomName } = router.query;
+    const {data: session} = useSession();
+
     const [currentUrl, setCurrentUrl] = useState('');
     const [who, setWho] = useState('');
     const [what, setWhat] = useState('');
     const [when, setWhen] = useState('');
     const [where, setWhere] = useState('');
     const [why, setWhy] = useState('');
-    const [roomName, setRoomName] = useState('');
-    const [nickName, setNickName] = useState('');
-
-    useEffect(() => {
-        const info = sessionStorage.getItem('fiveWs');
-        const infoJson = JSON.parse(info!)
-        
-        setRoomName(infoJson.roomName!);
-        setNickName(infoJson.nickName!);
-    }, [])
 
     useEffect(() => {
         setCurrentUrl(urls[0])
@@ -58,7 +54,9 @@ export default function Questions ({ urls }: QuestionsProps) {
     }
 
     const enviar = async () => {
-        const t = await axios.post('/api/descriptions', {
+        const nickName = session?.user?.name as string
+
+        const t = await axios.post('/api/descriptions/create', {
             roomName,
             nickName,
             url: currentUrl,
@@ -118,6 +116,13 @@ export default function Questions ({ urls }: QuestionsProps) {
             <Footer />
         </>
     )
+}
+
+export async function getStaticPaths() {
+    return {
+      paths: [],
+      fallback: "blocking"
+    };
 }
 
 export async function getStaticProps() {
