@@ -30,18 +30,32 @@ export default function Dashboard () {
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
 
     const createNewRoom = async () => {
-        const userName = session?.user?.name as string;
-        const t = await axios.post('api/rooms/create', {
-            userName,
-            roomName: newRoomName,
-        })
-        
-        setRoomsList(prevState => ([...prevState, 
-            {data: {
+        try {
+            if (newRoomName == '') {
+                throw new Error ("Digite um nome para a sala");
+            }
+
+            const userName = session?.user?.name as string;
+            const createdData = await axios.post('api/rooms/create', {
                 userName,
                 roomName: newRoomName,
-            }}
-        ]))
+            })
+
+            const { data } = createdData;
+
+            if (data.created == false) {
+                throw new Error ("Nome da sala já existe");
+            }
+            
+            setRoomsList(prevState => ([...prevState, 
+                {data: {
+                    userName,
+                    roomName: newRoomName,
+                }}
+            ]))
+        } catch (err) {
+            alert(err)
+        }
     }
     
     const getUserRooms = async () => {
@@ -108,10 +122,22 @@ export default function Dashboard () {
 
                 <section>
                     <SubTitle>Veja aqui suas salas</SubTitle>
-                    {roomsList.length > 0 && roomsList.map((room) => (
-                        <p>{room.data.roomName}</p>
-                    ))}
-                </section>
+                    {roomsList.length > 0
+                        ? roomsList.map((room, i) => (
+                            <p key={i}>{room.data.roomName}</p>
+                        ))
+                        : (
+                            <div>
+                                <p>
+                                    Nenhuma sala encontrada
+                                </p>
+                                <Button onClick={() => setShowNewRoom(!showNewRoom)}>
+                                    Criar nova sala
+                                </Button>
+                            </div>
+                        )
+                    }
+                </section> 
 
                 <section>
                     <SubTitle>Veja aqui suas descrições</SubTitle>
