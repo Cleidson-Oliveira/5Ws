@@ -18,12 +18,26 @@ interface RoomsListType {
     }
 }
 
+interface DescriptionsListType {
+    data: {
+        roomName: string,
+        nickName: string,
+        url: string,
+        who: string,
+        what: string,
+        when: string,
+        where: string,
+        why: string,
+    }
+}
+
 export default function Dashboard () {
 
     const router = useRouter();
     const {data: session} = useSession();
 
     const [roomsList, setRoomsList] = useState<RoomsListType[]>([]);
+    const [descriptionsList, setDescriptionsList] = useState<DescriptionsListType[]>([]);
     const [newRoomName, setNewRoomName] = useState('');
     const [roomName, setRoomName] = useState('');
     const [showNewRoom, setShowNewRoom] = useState(false);
@@ -64,6 +78,13 @@ export default function Dashboard () {
         });
         setRoomsList(rooms.data.data)
     }
+
+    const getUserDescriptions = async () => {
+        const desc = await axios.post('api/descriptions/read', {
+            userName: session?.user?.name,
+        });
+        setDescriptionsList(desc.data.data)
+    }
     
     const enterInRoom = async () => {
         const rooms = await axios.post('api/rooms/verifyIfExistRoom', {
@@ -75,7 +96,8 @@ export default function Dashboard () {
     }
 
     useEffect(() => {
-        getUserRooms();     
+        getUserRooms();
+        getUserDescriptions();
     }, [])
 
     return (
@@ -141,6 +163,21 @@ export default function Dashboard () {
 
                 <section>
                     <SubTitle>Veja aqui suas descrições</SubTitle>
+                    {descriptionsList.length > 0
+                        ? descriptionsList.map((desc, i) => (
+                            <p key={i}>{desc.data.roomName}</p>
+                        ))
+                        : (
+                            <div>
+                                <p>
+                                    Nenhuma descrição encontrada
+                                </p>
+                                <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
+                                    Entre em uma sala
+                                </Button>
+                            </div>
+                        )
+                    }
                 </section>
             </MainContent>
 
