@@ -8,6 +8,7 @@ import { Wrapper, AsideContent, MainContent } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
 import Buttons from "../Utils/Button";
+import { Modal } from "../Modal";
 
 const { Button } = Buttons;
 
@@ -95,6 +96,14 @@ export default function Dashboard () {
         }
     }
 
+    const handlerShowNewRoom = () => {
+        setShowNewRoom(!showNewRoom)
+    }
+    
+    const handlerShowEnterInRoom = () => {
+        setShowEnterInRoom(!showEnterInRoom)
+    }
+
     useEffect(() => {
         getUserRooms();
         getUserDescriptions();
@@ -106,7 +115,7 @@ export default function Dashboard () {
                 <Title>Dashboard</Title>
                 <Button 
                     onClick={() => {
-                        setShowNewRoom(!showNewRoom)
+                        handlerShowNewRoom()
                     }}
                 >
                     Criar nova sala
@@ -114,7 +123,7 @@ export default function Dashboard () {
 
                 <Button 
                     onClick={() => {
-                        setShowEnterInRoom(!showEnterInRoom)
+                        handlerShowEnterInRoom()
                     }}
                 >
                     Entar em uma sala
@@ -122,25 +131,43 @@ export default function Dashboard () {
             </AsideContent>
 
             <MainContent>
-                {showNewRoom && (<section>
-                    <Title>Crie uma sala</Title>
-                    <Input
-                        name="Nome da sala"
-                        placeholder="Digite o nome da sala"
-                        value={[newRoomName, setNewRoomName]}
-                    />
-                    <Button onClick={() => createNewRoom()}>Criar</Button>
-                </section>)}
+                {showNewRoom && (
+                    <Modal
+                        functions={handlerShowNewRoom}
+                    >
+                        <section>
+                            <Title>Crie uma sala</Title>
+                            <Input
+                                name="Nome da sala"
+                                placeholder="Digite o nome da sala"
+                                value={[newRoomName, setNewRoomName]}
+                            />
+                            <Button onClick={() => {
+                                createNewRoom()
+                                handlerShowNewRoom()
+                            }}>Criar</Button>
+                        </section>
+                    </Modal>
+                )}
 
-                {showEnterInRoom && (<section>
-                    <Title>Entre em uma sala</Title>
-                    <Input
-                        name="Nome da sala"
-                        placeholder="Digite o nome da sala"
-                        value={[roomName, setRoomName]}
-                    />
-                    <Button onClick={() => enterInRoom()}>Entrar</Button>
-                </section>)}
+                {showEnterInRoom && (
+                    <Modal
+                        functions={handlerShowEnterInRoom}
+                    >
+                        <section>
+                            <Title>Entre em uma sala</Title>
+                            <Input
+                                name="Nome da sala"
+                                placeholder="Digite o nome da sala"
+                                value={[roomName, setRoomName]}
+                            />
+                            <Button onClick={() => {
+                                enterInRoom();
+                                handlerShowEnterInRoom();
+                            }}>Entrar</Button>
+                        </section>
+                    </Modal>
+                )}
 
                 <section>
                     <SubTitle>Veja aqui suas salas</SubTitle>

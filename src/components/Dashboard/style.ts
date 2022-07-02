@@ -36,6 +36,7 @@ export const MainContent = styled.div`
         padding: 2rem;
         border: 1px solid black;
         border-radius: 5px;
+        background-color: white;
 
         & + section {
             margin-top: 1rem; 
