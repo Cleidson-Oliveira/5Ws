@@ -13,6 +13,7 @@ import { Wrapper } from "./style";
 import Image from "../../../components/Utils/ImageWillBeDescribed";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Title } from "../../../components/Utils/Title/intex";
 
 interface QuestionsProps {
     urls: string[]
@@ -81,11 +82,15 @@ export default function Questions ({ urls }: QuestionsProps) {
             <GlobalStyle />
             <Header page="Rooms"/>
             <Wrapper>
+                <Title>{roomName}</Title>
+            </Wrapper>
+            <Wrapper>
                 <section>
                     <Image src={currentUrl} onChangeCurrentUrl={handleCurrentUrl}/>
                 </section>
                 <section>
                     <Input
+                        autofocus
                         value={[who, setWho]}
                         name="Who"
                         placeholder="Quem está na foto?"

@@ -138,6 +138,7 @@ export default function Dashboard () {
                         <section>
                             <Title>Crie uma sala</Title>
                             <Input
+                                autofocus
                                 name="Nome da sala"
                                 placeholder="Digite o nome da sala"
                                 value={[newRoomName, setNewRoomName]}
@@ -157,6 +158,7 @@ export default function Dashboard () {
                         <section>
                             <Title>Entre em uma sala</Title>
                             <Input
+                                autofocus
                                 name="Nome da sala"
                                 placeholder="Digite o nome da sala"
                                 value={[roomName, setRoomName]}
@@ -190,21 +192,26 @@ export default function Dashboard () {
 
                 <section>
                     <SubTitle>Veja aqui suas descrições</SubTitle>
-                    {descriptionsList.length > 0
-                        ? descriptionsList.map((desc, i) => (
-                            <p key={i}>{desc.data.roomName}</p>
-                        ))
-                        : (
-                            <div>
-                                <p>
-                                    Nenhuma descrição encontrada
-                                </p>
-                                <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
-                                    Entre em uma sala
-                                </Button>
-                            </div>
-                        )
-                    }
+                    <div>
+                        {descriptionsList.length > 0
+                            ? descriptionsList.map((desc, i) => (
+                                <img 
+                                    src={desc.data.url}
+                                    key={i}
+                                />
+                            ))
+                            : (
+                                <>
+                                    <p>
+                                        Nenhuma descrição encontrada
+                                    </p>
+                                    <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
+                                        Entre em uma sala
+                                    </Button>
+                                </>
+                            )
+                        }
+                    </div>
                 </section>
             </MainContent>
 

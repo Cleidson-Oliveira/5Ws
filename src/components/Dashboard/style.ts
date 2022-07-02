@@ -27,19 +27,25 @@ export const MainContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: start;
-    min-width: 65vw;
+    width: 65vw;
     padding: 3rem;
     box-sizing: border-box;
     background-color: ${Colors.color2};
 
     section {
-        padding: 2rem;
-        border: 1px solid black;
+        padding: 2rem 3rem;
+        border: 1px solid ${Colors.color5};
         border-radius: 5px;
-        background-color: white;
+        background-color:  ${Colors.color5};
 
         & + section {
             margin-top: 1rem; 
+        }
+
+        img {
+            width: 20%;
+            margin: .5rem;
+            cursor: pointer;
         }
     }
 `;
