@@ -90,10 +90,10 @@ export default function Dashboard () {
             const rooms = await axios.post('api/rooms/delete', {
                 ref,
             });
-
+            
             setRoomsList(prevState => (
                 prevState.filter(roomWillBeDeleted => {
-                    return roomWillBeDeleted.ref["@ref"].id == ref
+                    return roomWillBeDeleted.ref["@ref"].id != ref
                 })
             ))
         } catch (err){
