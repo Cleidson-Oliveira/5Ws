@@ -3,10 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { fauna } from "../../../../services/faunadb";
 import { query as q} from 'faunadb';
 
-function ErrorHandler () {
-  throw "error"
-}
-
 function HandlerCreateRoom ( req: NextApiRequest, res: NextApiResponse ) {
   const { body } = req;
   fauna.query(

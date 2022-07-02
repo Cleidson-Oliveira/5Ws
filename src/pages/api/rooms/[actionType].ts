@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import HandlerGetAllRooms from "./actions/readAll";
 import HandlerGetRoom from "./actions/readOne";
 import HandlerCreateRooms from "./actions/create";
+import HandlerDeleteRoom from "./actions/delete";
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -19,6 +20,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         
         case "verifyIfExistRoom":
             HandlerGetRoom(req, res)
+            break;
+        
+        case "delete":
+            HandlerDeleteRoom(req, res)
             break;
 
         default:

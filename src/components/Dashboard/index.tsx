@@ -10,12 +10,17 @@ import Input from "../Utils/Input";
 import Buttons from "../Utils/Button";
 import { Modal } from "../Modal";
 
-const { Button } = Buttons;
+const { Button, RoundedButton } = Buttons;
 
 interface RoomsListType {
     data: {
         userName: string,
         roomName: string
+    },
+    ref: {
+        "@ref": {
+            id: string
+        }
     }
 }
 
@@ -56,17 +61,17 @@ export default function Dashboard () {
                 roomName: newRoomName,
             })
 
-            const { data } = createdData;
+            console.log(createdData.data.ref)
 
-            if (data.created == false) {
+            if (createdData.data.created == false) {
                 throw new Error ("Nome da sala já existe");
             }
             
             setRoomsList(prevState => ([...prevState, 
-                {data: {
-                    userName,
-                    roomName: newRoomName,
-                }}
+                {
+                    data: createdData.data.data,
+                    ref: createdData.data.ref
+                }
             ]))
         } catch (err) {
             alert(err)
@@ -78,6 +83,22 @@ export default function Dashboard () {
             userName: session?.user?.name,
         });
         setRoomsList(rooms.data.data)
+    }
+
+    const deleteRoom = async (ref: string) => {
+        try {
+            const rooms = await axios.post('api/rooms/delete', {
+                ref,
+            });
+
+            setRoomsList(prevState => (
+                prevState.filter(roomWillBeDeleted => {
+                    return roomWillBeDeleted.ref["@ref"].id == ref
+                })
+            ))
+        } catch (err){
+            console.log(err)
+        }
     }
 
     const getUserDescriptions = async () => {
@@ -175,7 +196,14 @@ export default function Dashboard () {
                     <SubTitle>Veja aqui suas salas</SubTitle>
                     {roomsList.length > 0
                         ? roomsList.map((room, i) => (
-                            <p key={i}>{room.data.roomName}</p>
+                            <div key={i}>
+                                <p>{room.data.roomName}</p>
+                                <RoundedButton onClick={() => {
+                                    deleteRoom(room.ref["@ref"].id)}}
+                                >
+                                    Apagar
+                                </RoundedButton>
+                            </div>
                         ))
                         : (
                             <div>
