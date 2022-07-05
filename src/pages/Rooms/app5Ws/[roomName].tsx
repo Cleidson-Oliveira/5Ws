@@ -9,7 +9,7 @@ import Input from "../../../components/Utils/Input";
 import Footer from "../../../components/Footer";
 
 import { GlobalStyle } from "../../../styles/Global";
-import { Wrapper } from "./style";
+import Wrapper from "./style";
 import Image from "../../../components/Utils/ImageWillBeDescribed";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";

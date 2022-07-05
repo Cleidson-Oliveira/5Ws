@@ -10,7 +10,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Buttons from "../../components/Utils/Button";
 import { GlobalStyle } from "../../styles/Global";
-import { Wrapper } from "./style";
+import Wrapper from "./style";
 
 interface SignInProps {
     providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>
