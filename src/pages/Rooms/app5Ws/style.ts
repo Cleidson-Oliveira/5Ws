@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
     display: flex;
     padding: 2.5rem;
 
@@ -13,3 +13,5 @@ export const Wrapper = styled.div`
         }
     }
 `;
+
+export default Wrapper
