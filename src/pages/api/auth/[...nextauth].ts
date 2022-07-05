@@ -15,12 +15,12 @@ export default NextAuth({
     pages: {
         signIn: '/auth/signin',
     },
-    callbacks: {
-        async signIn() {
-            return true
-        },
-        async session({ session }) {
-            return session
-        },
-    }
+    // callbacks: {
+    //     async signIn() {
+    //         return true
+    //     },
+    //     async session({ session }) {
+    //         return session
+    //     },
+    // }
 })
