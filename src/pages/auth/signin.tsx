@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -26,6 +27,22 @@ export default function SignIn({ providers }: SignInProps) {
         }
     }, [session])
 
+    const socialIcon = (name: string) => {
+
+        switch (name) {
+            case "Facebook":
+                return (<FaFacebook />)
+                break;
+            
+            case "Google":
+                return (<FcGoogle />)
+                break;
+        
+            default:
+                break;
+        }
+    }
+
     return (
         <>
             <Head><title>5Ws | Sign In</title></Head>
@@ -37,8 +54,9 @@ export default function SignIn({ providers }: SignInProps) {
                     {Object.values(providers).map((provider) => (
                         <Buttons.Button
                             key={provider.name}
-                            onClick={() => signIn(provider.id)}>
-                            {provider.name == "Google" && <FcGoogle />}
+                            onClick={() => signIn(provider.id)}
+                        >
+                            {socialIcon(provider.name)}
                             {provider.name}
                         </Buttons.Button>
                     ))}
