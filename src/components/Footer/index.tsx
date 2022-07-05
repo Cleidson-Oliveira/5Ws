@@ -5,7 +5,7 @@ export default function Footer () {
         <Wrapper>
             <p>
                 Feito com ❤️ por 
-                <a href="https://github.com/Cleidson-Oliveira" target="_blank"> Cleidson Oliveira</a>                
+                <a href="https://github.com/Cleidson-Oliveira" target="_blank" rel="noreferrer"> Cleidson Oliveira</a>                
             </p>        
         </Wrapper>
     )
