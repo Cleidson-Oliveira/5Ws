@@ -4,11 +4,12 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 
-import { Wrapper, AsideContent, MainContent } from "./style";
+import { Wrapper, AsideContent, MainContent, ItemListRoom } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
 import Buttons from "../Utils/Button";
 import { Modal } from "../Modal";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const { Button, RoundedButton } = Buttons;
 
@@ -196,14 +197,14 @@ export default function Dashboard () {
                     <SubTitle>Veja aqui suas salas</SubTitle>
                     {roomsList.length > 0
                         ? roomsList.map((room, i) => (
-                            <div key={i}>
-                                <p>{room.data.roomName}</p>
+                            <ItemListRoom key={i}>
+                                <label>{room.data.roomName}</label>
                                 <RoundedButton onClick={() => {
                                     deleteRoom(room.ref["@ref"].id)}}
                                 >
-                                    Apagar
+                                    <AiOutlineDelete />
                                 </RoundedButton>
-                            </div>
+                            </ItemListRoom>
                         ))
                         : (
                             <div>
