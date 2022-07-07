@@ -40,7 +40,13 @@ export default function Questions ({ urls }: QuestionsProps) {
 
     useEffect(() => {
         setCurrentUrl(urls[0])
-    },[urls])
+    }, [urls])
+
+    useEffect(() => {
+        if (session?.user == null || session?.user == undefined) {
+            router.push("/auth/signin");
+        }
+    }, [session])
 
     const handleCurrentUrl = () => {
         setCurrentUrl(prevState => {
