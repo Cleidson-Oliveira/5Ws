@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import HandlerGetAllRooms from "./actions/readAll";
-import HandlerGetRoom from "./actions/readOne";
+import { HandlerGetAllRooms, HandlerGetExistesRoom } from "./actions/read";
 import HandlerCreateRooms from "./actions/create";
 import HandlerDeleteRoom from "./actions/delete";
 
@@ -19,7 +18,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             break;
         
         case "verifyIfExistRoom":
-            HandlerGetRoom(req, res)
+            HandlerGetExistesRoom(req, res)
             break;
         
         case "delete":
