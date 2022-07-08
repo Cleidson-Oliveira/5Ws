@@ -71,7 +71,8 @@ export default function Questions ({ urls }: QuestionsProps) {
             what, 
             when, 
             where, 
-            why
+            why,
+            comments: []
         })
        
         handleCurrentUrl();

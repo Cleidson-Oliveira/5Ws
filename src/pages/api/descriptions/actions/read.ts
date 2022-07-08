@@ -52,8 +52,3 @@ export function HandlerGetAllDescriptionsByRoomName(req: NextApiRequest, res: Ne
         err.errors()[0].description,
     ))
 }
-
-// export default {
-//     HandlerGetAllDescriptionsByRoomName, 
-//     HandlerGetAllDescriptionsByNickName
-// };

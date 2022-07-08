@@ -35,6 +35,12 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
+        comments: [string],
+    },
+    ref: {
+        "@ref": {
+            id: string
+        }
     }
 }
 
@@ -136,6 +142,17 @@ export default function Dashboard () {
         setDescriptionsOnRoom([])
     }
 
+    const addNewCommentOnDescription = async (ref: string, prevComments: [string]) => {
+        const comment = prompt("add um comentário") as string;
+        const comments = prevComments;
+        comments.push(comment);
+        
+        const rooms = await axios.post('api/descriptions/addComments', {
+            ref,
+            comments
+        });
+    }
+
     useEffect(() => {
         getUserRooms();
         getUserDescriptions();
@@ -209,8 +226,11 @@ export default function Dashboard () {
                     >
                         <section>
                             {
-                                descriptionsOnRoom.map(({data}) => (
-                                    <p key={data.url}>{data.nickName}</p>
+                                descriptionsOnRoom.map(({data, ref}) => (
+                                    <div>
+                                        <p key={data.url}>{data.nickName}</p>
+                                        <button onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}>comentar</button>
+                                    </div>
                                 ))
                             }
                         </section>
