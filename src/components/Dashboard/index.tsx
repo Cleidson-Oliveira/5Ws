@@ -44,6 +44,7 @@ export default function Dashboard () {
     const {data: session} = useSession();
 
     const [roomsList, setRoomsList] = useState<RoomsListType[]>([]);
+    const [descriptionsOnRoom, setDescriptionsOnRoom] = useState<DescriptionsListType[]>([]);
     const [descriptionsList, setDescriptionsList] = useState<DescriptionsListType[]>([]);
     const [newRoomName, setNewRoomName] = useState('');
     const [roomName, setRoomName] = useState('');
@@ -58,11 +59,9 @@ export default function Dashboard () {
 
             const userName = session?.user?.name as string;
             const createdData = await axios.post('api/rooms/create', {
-                userName,
+                createdBy: userName,
                 roomName: newRoomName,
             })
-
-            console.log(createdData.data.ref)
 
             if (createdData.data.created == false) {
                 throw new Error ("Nome da sala já existe");
@@ -103,10 +102,17 @@ export default function Dashboard () {
     }
 
     const getUserDescriptions = async () => {
-        const desc = await axios.post('api/descriptions/read', {
+        const desc = await axios.post('api/descriptions/readByNickName', {
             userName: session?.user?.name,
         });
         setDescriptionsList(desc.data.data)
+    }
+    
+    const getDescriptionsOnRoom = async (roomName: string) => {
+        const desc = await axios.post('api/descriptions/readByRoomName', {
+            roomName
+        });
+        setDescriptionsOnRoom(desc.data.data)
     }
     
     const enterInRoom = async () => {
@@ -124,6 +130,10 @@ export default function Dashboard () {
     
     const handlerShowEnterInRoom = () => {
         setShowEnterInRoom(!showEnterInRoom)
+    }
+
+    const handlerDescriptionsOnRoomList = () =>{
+        setDescriptionsOnRoom([])
     }
 
     useEffect(() => {
@@ -192,13 +202,29 @@ export default function Dashboard () {
                         </section>
                     </Modal>
                 )}
+                
+                {descriptionsOnRoom.length > 0 && (
+                    <Modal
+                        functions={handlerDescriptionsOnRoomList}
+                    >
+                        <section>
+                            {
+                                descriptionsOnRoom.map(({data}) => (
+                                    <p key={data.url}>{data.nickName}</p>
+                                ))
+                            }
+                        </section>
+                    </Modal>
+                )}
 
                 <section>
                     <SubTitle>Veja aqui suas salas</SubTitle>
                     {roomsList.length > 0
                         ? roomsList.map((room, i) => (
                             <ItemListRoom key={i}>
-                                <label>{room.data.roomName}</label>
+                                <label
+                                    onClick={() => getDescriptionsOnRoom(room.data.roomName)}
+                                >{room.data.roomName}</label>
                                 <RoundedButton onClick={() => {
                                     deleteRoom(room.ref["@ref"].id)}}
                                 >

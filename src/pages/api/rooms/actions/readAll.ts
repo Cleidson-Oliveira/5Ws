@@ -9,7 +9,7 @@ function HandlerGetAllRooms (req: NextApiRequest, res: NextApiResponse) {
         q.Map(
             q.Paginate(
                 q.Match(
-                    q.Index("rooms_by_username"),
+                    q.Index("rooms_by_createdBy"),
                     body.userName
                 ),
                 { size: 10 }
