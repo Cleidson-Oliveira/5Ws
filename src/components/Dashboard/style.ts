@@ -42,10 +42,12 @@ export const MainContent = styled.div`
             margin-top: 1rem; 
         }
 
-        img {
-            width: 20%;
-            margin: .5rem;
-            cursor: pointer;
+        div {
+            img {
+                width: 20%;
+                margin: .5rem;
+                cursor: pointer;
+            }
         }
     }
 `;
@@ -66,4 +68,18 @@ export const ItemListRoom = styled.div`
     button {
         margin: 0;
     }
-`
+`;
+
+export const CardDescription = styled.article`
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+    img {
+        width: 60%;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+`;

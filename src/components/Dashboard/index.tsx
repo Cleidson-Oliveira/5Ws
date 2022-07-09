@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 
-import { Wrapper, AsideContent, MainContent, ItemListRoom } from "./style";
+import { Wrapper, AsideContent, MainContent, ItemListRoom, CardDescription } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
 import Buttons from "../Utils/Button";
@@ -143,14 +143,22 @@ export default function Dashboard () {
     }
 
     const addNewCommentOnDescription = async (ref: string, prevComments: [string]) => {
-        const comment = prompt("add um comentário") as string;
-        const comments = prevComments;
-        comments.push(comment);
-        
-        const rooms = await axios.post('api/descriptions/addComments', {
-            ref,
-            comments
-        });
+        try {
+            const comment = prompt("Adicione um comentário!") as string;
+            const comments = prevComments;
+            if (comment == '') {
+                throw new Error("Digite um comentário!")
+            }
+            comments.push(comment);
+            
+            const rooms = await axios.post('api/descriptions/addComments', {
+                ref,
+                comments
+            });
+
+        } catch (err) {
+            alert(err)
+        }
     }
 
     useEffect(() => {
@@ -227,10 +235,25 @@ export default function Dashboard () {
                         <section>
                             {
                                 descriptionsOnRoom.map(({data, ref}) => (
-                                    <div>
-                                        <p key={data.url}>{data.nickName}</p>
-                                        <button onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}>comentar</button>
-                                    </div>
+                                    <CardDescription key={data.url}>
+                                        <img src={data.url} />
+                                        <p>{data.nickName}</p>
+                                        <div>
+                                            <p>Who: {data.who}</p>
+                                            <p>What: {data.what}</p>
+                                            <p>When: {data.when}</p>
+                                            <p>Where: {data.where}</p>
+                                            <p>Why: {data.why}</p>
+                                        </div>
+                                        <div>
+                                            <h4>Comentários</h4>
+                                            {data.comments.map((comment, i) => (
+                                                <p key={i}>{comment}</p>
+                                            ))}
+                                        </div>
+                                        
+                                        <Button onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}>comentar</Button>
+                                    </CardDescription>
                                 ))
                             }
                         </section>

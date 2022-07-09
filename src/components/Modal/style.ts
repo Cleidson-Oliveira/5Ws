@@ -19,4 +19,13 @@ export const Wrapper = styled.div`
         right: 2rem;
         top: 2rem;
     }
+
+    & > section {
+        max-height: 80%;
+        max-width: 80%;
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
 `;
