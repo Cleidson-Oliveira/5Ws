@@ -106,6 +106,22 @@ export default function Dashboard () {
             console.log(err)
         }
     }
+    
+    const deleteDescription = async (ref: string) => {
+        try {
+            const description = await axios.post('api/descriptions/delete', {
+                ref,
+            });
+            
+            setDescriptionsList(prevState => (
+                prevState.filter(roomWillBeDeleted => {
+                    return roomWillBeDeleted.ref["@ref"].id != ref
+                })
+            ))
+        } catch (err){
+            console.log(err)
+        }
+    }
 
     const getUserDescriptions = async () => {
         const desc = await axios.post('api/descriptions/readByNickName', {
@@ -252,7 +268,11 @@ export default function Dashboard () {
                                             ))}
                                         </div>
                                         
-                                        <Button onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}>comentar</Button>
+                                        <Button 
+                                            onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}
+                                        >
+                                            Comentar
+                                        </Button>
                                     </CardDescription>
                                 ))
                             }
@@ -293,10 +313,18 @@ export default function Dashboard () {
                     <div>
                         {descriptionsList.length > 0
                             ? descriptionsList.map((desc, i) => (
-                                <img 
-                                    src={desc.data.url}
-                                    key={i}
-                                />
+                                <div>
+                                    <img 
+                                        src={desc.data.url}
+                                        key={i}
+                                    />
+                                    <RoundedButton onClick={() => {
+                                        deleteDescription(desc.ref["@ref"].id)}}
+                                    >
+                                        <AiOutlineDelete />
+                                    </RoundedButton>
+                                        
+                                </div>
                             ))
                             : (
                                 <>
