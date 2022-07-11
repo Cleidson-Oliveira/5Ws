@@ -6,7 +6,6 @@ export const Wrapper = styled.main`
     justify-content: space-evenly;
     width: 100%;
     min-height: 100vh;
-    padding: 3rem 0;
 `;
 
 export const AsideContent = styled.div`
@@ -14,10 +13,11 @@ export const AsideContent = styled.div`
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    min-width: 20vw;
-    background-color: ${Colors.color2};
+    background-color: ${Colors.color5};
     padding-top: 1rem;
-    
+    flex-grow: 1;
+    min-width: 20vw;
+
     button {
         width: 75%;
     }
@@ -27,10 +27,10 @@ export const MainContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: start;
-    width: 65vw;
     padding: 3rem;
+    flex-grow: 4;
     box-sizing: border-box;
-    background-color: ${Colors.color2};
+    background-color: ${Colors.color4};
 
     section {
         padding: 2rem 3rem;

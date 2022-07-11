@@ -56,6 +56,7 @@ export default function Dashboard () {
     const [roomName, setRoomName] = useState('');
     const [showNewRoom, setShowNewRoom] = useState(false);
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
+    const [dashboardShowOptions, setDashboardShowOptions] = useState<"rooms" | "descriptions">("rooms");
 
     const createNewRoom = async () => {
         try {
@@ -177,6 +178,10 @@ export default function Dashboard () {
         }
     }
 
+    const handlerDashboardShowOptions = (option: "rooms" | "descriptions") => {
+        setDashboardShowOptions(option)
+    }
+
     useEffect(() => {
         getUserRooms();
         getUserDescriptions();
@@ -188,18 +193,18 @@ export default function Dashboard () {
                 <Title>Dashboard</Title>
                 <Button 
                     onClick={() => {
-                        handlerShowNewRoom()
+                        handlerDashboardShowOptions("rooms")
                     }}
                 >
-                    Criar nova sala
+                    Ver salas
                 </Button>
 
                 <Button 
                     onClick={() => {
-                        handlerShowEnterInRoom()
+                        handlerDashboardShowOptions("descriptions")
                     }}
                 >
-                    Entar em uma sala
+                    Ver descrições
                 </Button>
             </AsideContent>
 
@@ -219,7 +224,9 @@ export default function Dashboard () {
                             <Button onClick={() => {
                                 createNewRoom()
                                 handlerShowNewRoom()
-                            }}>Criar</Button>
+                            }}>
+                                Criar
+                            </Button>
                         </section>
                     </Modal>
                 )}
@@ -280,65 +287,72 @@ export default function Dashboard () {
                     </Modal>
                 )}
 
-                <section>
-                    <SubTitle>Veja aqui suas salas</SubTitle>
-                    {roomsList.length > 0
-                        ? roomsList.map((room, i) => (
-                            <ItemListRoom key={i}>
-                                <label
-                                    onClick={() => getDescriptionsOnRoom(room.data.roomName)}
-                                >{room.data.roomName}</label>
-                                <RoundedButton onClick={() => {
-                                    deleteRoom(room.ref["@ref"].id)}}
-                                >
-                                    <AiOutlineDelete />
-                                </RoundedButton>
-                            </ItemListRoom>
-                        ))
-                        : (
-                            <div>
-                                <p>
-                                    Nenhuma sala encontrada
-                                </p>
-                                <Button onClick={() => setShowNewRoom(!showNewRoom)}>
-                                    Criar nova sala
-                                </Button>
-                            </div>
-                        )
-                    }
-                </section> 
-
-                <section>
-                    <SubTitle>Veja aqui suas descrições</SubTitle>
-                    <div>
-                        {descriptionsList.length > 0
-                            ? descriptionsList.map((desc, i) => (
+                {dashboardShowOptions == "rooms" && (
+                    <section>
+                        <SubTitle>Veja aqui suas salas</SubTitle>
+                        {
+                            (roomsList.length > 0) ? (
                                 <div>
-                                    <img 
-                                        src={desc.data.url}
-                                        key={i}
-                                    />
-                                    <RoundedButton onClick={() => {
-                                        deleteDescription(desc.ref["@ref"].id)}}
-                                    >
-                                        <AiOutlineDelete />
-                                    </RoundedButton>
-                                        
+                                    {roomsList.map((room, i) => (
+                                        <ItemListRoom key={i}>
+                                            <label
+                                                onClick={() => getDescriptionsOnRoom(room.data.roomName)}
+                                            >{room.data.roomName}</label>
+                                            <RoundedButton onClick={() => {
+                                                deleteRoom(room.ref["@ref"].id)}}
+                                            >
+                                                <AiOutlineDelete />
+                                            </RoundedButton>
+                                        </ItemListRoom>
+                                    ))}
                                 </div>
-                            ))
-                            : (
-                                <>
+                            ) : (
+                                <div>
                                     <p>
-                                        Nenhuma descrição encontrada
+                                        Nenhuma sala encontrada
                                     </p>
-                                    <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
-                                        Entre em uma sala
-                                    </Button>
-                                </>
+                                </div>
                             )
                         }
-                    </div>
-                </section>
+                            <Button onClick={() => setShowNewRoom(!showNewRoom)}>
+                                Criar nova sala
+                            </Button>
+                    </section>
+                )}
+
+                {dashboardShowOptions == "descriptions" && (
+                    <section>
+                        <SubTitle>Veja aqui suas descrições</SubTitle>
+                        <div>
+                            {descriptionsList.length > 0
+                                ? descriptionsList.map((desc, i) => (
+                                    <div>
+                                        <img 
+                                            src={desc.data.url}
+                                            key={i}
+                                        />
+                                        <RoundedButton onClick={() => {
+                                            deleteDescription(desc.ref["@ref"].id)}}
+                                        >
+                                            <AiOutlineDelete />
+                                        </RoundedButton>
+                                            
+                                    </div>
+                                ))
+                                : (
+                                    <>
+                                        <p>
+                                            Nenhuma descrição encontrada
+                                        </p>
+                                        <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
+                                            Entre em uma sala
+                                        </Button>
+                                    </>
+                                )
+                            }
+                        </div>
+                    </section>
+                )}
             </MainContent>
 
         </Wrapper>

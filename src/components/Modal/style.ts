@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
         max-height: 80%;
         max-width: 80%;
         overflow: auto;
-        display: flex;
+        /* display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-around; */
     }
 `;
