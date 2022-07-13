@@ -326,10 +326,9 @@ export default function Dashboard () {
                         <div>
                             {descriptionsList.length > 0
                                 ? descriptionsList.map((desc, i) => (
-                                    <div>
+                                    <div key={i}>
                                         <img 
                                             src={desc.data.url}
-                                            key={i}
                                         />
                                         <RoundedButton onClick={() => {
                                             deleteDescription(desc.ref["@ref"].id)}}
