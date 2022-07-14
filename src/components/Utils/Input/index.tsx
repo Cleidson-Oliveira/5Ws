@@ -7,6 +7,12 @@ interface InputProps {
     value: [string, (param: string) => void]
 }
 
+interface UncrontroledInputProps {
+    inputId: string,
+    name: string,
+    placeholder: string
+}
+
 export default function Input ({ autofocus, name, placeholder, value: valueProps }: InputProps) {
 
     const [value, setValue] = valueProps;
@@ -14,7 +20,7 @@ export default function Input ({ autofocus, name, placeholder, value: valueProps
     return (
         <Wrapper>
             {name}
-            <input 
+            <input
                 autoFocus={autofocus}
                 type="text" 
                 name={name} 
@@ -25,3 +31,19 @@ export default function Input ({ autofocus, name, placeholder, value: valueProps
         </Wrapper>
     )
 }
+
+export function UncrontroledInput ({ inputId, name, placeholder }: UncrontroledInputProps) {
+
+    return (
+        <Wrapper>
+            {name}
+            <input
+                id={inputId}
+                type="text" 
+                name={name} 
+                placeholder={placeholder}
+            />
+        </Wrapper>
+    )
+}
+

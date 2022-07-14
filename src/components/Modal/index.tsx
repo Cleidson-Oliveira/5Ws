@@ -1,8 +1,6 @@
 import { IoMdClose } from "react-icons/io"
-import Buttons from "../Utils/Button";
 import { Wrapper } from "./style";
-
-const {RoundedButton} = Buttons;
+import { RoundedButton } from "../Utils/Button";
 
 interface ModalProps {
     children: JSX.Element,

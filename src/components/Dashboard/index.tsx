@@ -6,12 +6,12 @@ import axios from "axios";
 
 import { Wrapper, AsideContent, MainContent, ItemListRoom, CardDescription } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
-import Input from "../Utils/Input";
-import Buttons from "../Utils/Button";
+import Input, { UncrontroledInput } from "../Utils/Input";
+import { Button, RoundedButton } from "../Utils/Button";
 import { Modal } from "../Modal";
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
+import { CommentField } from "../Utils/CommentField";
 
-const { Button, RoundedButton } = Buttons;
 
 interface RoomsListType {
     data: {
@@ -35,7 +35,7 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
-        comments: [string],
+        comments: string[],
     },
     ref: {
         "@ref": {
@@ -159,14 +159,23 @@ export default function Dashboard () {
         setDescriptionsOnRoom([])
     }
 
-    const addNewCommentOnDescription = async (ref: string, prevComments: [string]) => {
+    const addNewCommentOnDescription = async (ref: string, prevComments: string[]) => {
         try {
-            const comment = prompt("Adicione um comentário!") as string;
+            const comment = document.getElementById(`comment-${ref}`) as HTMLInputElement
             const comments = prevComments;
-            if (comment == '') {
+            if (comment.value == '') {
                 throw new Error("Digite um comentário!")
             }
-            comments.push(comment);
+            
+            setDescriptionsList(prevState => (
+                prevState.map(description => (
+                    description.ref["@ref"].id == ref
+                    ? { ref : description.ref, data: {...description.data, comments}}
+                    : description
+                ))
+            ))
+
+            comments.push(comment.value);
             
             const rooms = await axios.post('api/descriptions/addComments', {
                 ref,
@@ -260,7 +269,7 @@ export default function Dashboard () {
                                 descriptionsOnRoom.map(({data, ref}) => (
                                     <CardDescription key={data.url}>
                                         <img src={data.url} />
-                                        <p>{data.nickName}</p>
+                                        <h4>{data.nickName}</h4>
                                         <div>
                                             <p>Who: {data.who}</p>
                                             <p>What: {data.what}</p>
@@ -270,16 +279,26 @@ export default function Dashboard () {
                                         </div>
                                         <div>
                                             <h4>Comentários</h4>
-                                            {data.comments.map((comment, i) => (
+                                            {
+                                            data.comments.length > 0
+                                            ? data.comments.map((comment, i) => (
                                                 <p key={i}>{comment}</p>
-                                            ))}
+                                            ))
+                                            : (<p>Que tal incluir um comentário?</p>)
+                                            }
                                         </div>
-                                        
-                                        <Button 
-                                            onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}
-                                        >
-                                            Comentar
-                                        </Button>
+
+                                        <CommentField>
+                                            <input 
+                                                id={`comment-${ref["@ref"].id}`}
+                                                placeholder="Adicione um comentário"
+                                            />                                        
+                                            <RoundedButton
+                                                onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}
+                                            >
+                                                <AiOutlineComment />
+                                            </RoundedButton>
+                                        </CommentField>
                                     </CardDescription>
                                 ))
                             }
@@ -290,6 +309,7 @@ export default function Dashboard () {
                 {dashboardShowOptions == "rooms" && (
                     <section>
                         <SubTitle>Veja aqui suas salas</SubTitle>
+                        <div>
                         {
                             (roomsList.length > 0) ? (
                                 <div>
@@ -307,16 +327,15 @@ export default function Dashboard () {
                                     ))}
                                 </div>
                             ) : (
-                                <div>
                                     <p>
                                         Nenhuma sala encontrada
                                     </p>
-                                </div>
                             )
                         }
                             <Button onClick={() => setShowNewRoom(!showNewRoom)}>
                                 Criar nova sala
                             </Button>
+                        </div>
                     </section>
                 )}
 
@@ -339,16 +358,14 @@ export default function Dashboard () {
                                     </div>
                                 ))
                                 : (
-                                    <>
-                                        <p>
-                                            Nenhuma descrição encontrada
-                                        </p>
-                                        <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
-                                            Entre em uma sala
-                                        </Button>
-                                    </>
+                                    <p>
+                                        Nenhuma descrição encontrada
+                                    </p>
                                 )
                             }
+                            <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
+                                Entre em uma sala
+                            </Button>
                         </div>
                     </section>
                 )}

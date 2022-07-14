@@ -15,8 +15,7 @@ export const AsideContent = styled.div`
     align-items: center;
     background-color: ${Colors.color5};
     padding-top: 1rem;
-    flex-grow: 1;
-    min-width: 20vw;
+    width: 25%;
 
     button {
         width: 75%;
@@ -27,21 +26,18 @@ export const MainContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: start;
-    padding: 3rem;
-    flex-grow: 4;
+    padding: 1rem;
+    width: 75%;
     box-sizing: border-box;
     background-color: ${Colors.color4};
 
     section {
+        box-sizing: border-box;
         padding: 2rem 3rem;
         border: 1px solid ${Colors.color5};
         border-radius: 5px;
         background-color:  ${Colors.color5};
-
-        & + section {
-            margin-top: 1rem; 
-        }
-
+        
         div {
             img {
                 width: 20%;
@@ -74,6 +70,9 @@ export const CardDescription = styled.article`
     width: 30%;
     display: flex;
     flex-direction: column;
+    padding: 1rem;
+    border-radius: .3rem;
+    background: #ffffff50;
 
     img {
         width: 60%;
@@ -81,5 +80,9 @@ export const CardDescription = styled.article`
 
     p {
         margin: 10px 0;
+    }
+
+    button {
+        margin-top: .3rem;
     }
 `;

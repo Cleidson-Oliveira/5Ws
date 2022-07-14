@@ -3,11 +3,12 @@ import { darken } from 'polished'
 
 import { Colors } from "../../../styles/Colors";
 
-const Button = styled.button`
+export const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50%;
+    max-width: 350px;
     height: 35px;
     border-radius: 5px;
     background-color: ${darken(0.1, Colors.color5)};
@@ -30,20 +31,13 @@ const Button = styled.button`
     }
 `;
 
-const RoundedButton = styled(Button)`
+export const RoundedButton = styled(Button)`
     width: 36px;
     height: 36px;
     border-radius: 50%;
 
     svg {
         margin: 0px;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
     }
 `;
-
-const Buttons = {
-    Button,
-    RoundedButton
-}
-
-export default Buttons
