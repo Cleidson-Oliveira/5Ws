@@ -28,7 +28,11 @@ export default class MyDocument extends Document {
     return (
     <Html lang='pt-br'>
       <Head>
-        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />  
+        <meta name="author" content="Cleidson Oliveira" />
+        <meta name="description" content="Aplicação que visa ajudar o processo de criação de frases em outra língua" />
+        <meta name="keywords" content="learn english, learn languages" />
+
         <link rel="icon" href="/favicon.ico" />
 
         <link
