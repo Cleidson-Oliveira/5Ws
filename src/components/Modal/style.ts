@@ -14,6 +14,8 @@ export const Wrapper = styled.div`
     top: 0;
     left: 0;
 
+    z-index: 10;
+
     & > button {
         position: absolute;
         right: 2rem;
@@ -24,8 +26,5 @@ export const Wrapper = styled.div`
         max-height: 80%;
         max-width: 80%;
         overflow: auto;
-        /* display: flex;
-        align-items: center;
-        justify-content: space-around; */
     }
 `;
