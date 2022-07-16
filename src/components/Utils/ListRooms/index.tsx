@@ -1,6 +1,6 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegCopy } from "react-icons/fa";
-import { RoundedButton } from "../Button";
+import { Button, RoundedButton } from "../Button";
 import { List, Wrapper } from "./style";
 
 interface RoomsListType {
@@ -41,7 +41,7 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
                     <div>
                         <p>
                             Nome:
-                            <span onClick={() => getDescriptionsOnRoom(room.data.roomName)} >
+                            <span>
                                 {room.data.roomName}
                             </span>
                         </p>
@@ -49,7 +49,7 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
                     <div title="Copy">
                         <p>
                             Código:
-                            <span onClick={() => copy(room.data.roomCode)}>
+                            <span className="pointer" onClick={() => copy(room.data.roomCode)}>
                                 {room.data.roomCode}
                             </span>
                             <FaRegCopy 
@@ -58,6 +58,9 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
                         </p>
                     </div>
                     <div>
+                        <Button onClick={() => getDescriptionsOnRoom(room.data.roomName)} >
+                            Ver
+                        </Button>
                         <RoundedButton onClick={() => {
                             deleteRoom(room.ref["@ref"].id)}}
                         >

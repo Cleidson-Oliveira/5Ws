@@ -140,7 +140,12 @@ export default function Dashboard () {
         const desc = await axios.post('api/descriptions/readByRoomName', {
             roomName
         });
-        setDescriptionsOnRoom(desc.data.data)
+        if (desc.data.data.length > 0) {
+            setDescriptionsOnRoom(desc.data.data)
+        } else {
+            alert("Não existem descrições nesta sala")
+        }
+
     }
     
     const enterInRoom = async () => {
@@ -202,10 +207,6 @@ export default function Dashboard () {
         getUserRooms();
         getUserDescriptions();
     }, [])
-    
-    useEffect(() => {
-        console.log(roomsList);
-    }, [roomsList])
 
     return (
         <Wrapper>

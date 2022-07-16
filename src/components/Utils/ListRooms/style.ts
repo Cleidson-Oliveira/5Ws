@@ -31,6 +31,9 @@ export const Wrapper = styled.div`
             span {
                 font-size: inherit;
                 font-weight: normal;
+            }
+            
+            span.pointer {
                 cursor: pointer;
             }
 
@@ -49,7 +52,9 @@ export const Wrapper = styled.div`
         grid-row: 2/3;
     }
     & div:nth-child(3) {
-        grid-column: 6/7;
+        display: flex;
+        justify-content: space-around;
+        grid-column: 1/7;
         grid-row: 3/4;
     }
 
