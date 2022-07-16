@@ -9,7 +9,7 @@ import { FaFacebook } from "react-icons/fa";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Buttons from "../../components/Utils/Button";
+import { Button } from "../../components/Utils/Button";
 import { GlobalStyle } from "../../styles/Global";
 import Wrapper from "./style";
 
@@ -52,13 +52,13 @@ export default function SignIn({ providers }: SignInProps) {
                 <div>
                     <p>Sign In With</p>
                     {Object.values(providers).map((provider) => (
-                        <Buttons.Button
+                        <Button
                             key={provider.name}
                             onClick={() => signIn(provider.id)}
                         >
                             {socialIcon(provider.name)}
                             {provider.name}
-                        </Buttons.Button>
+                        </Button>
                     ))}
                 </div>
             </Wrapper>

@@ -2,9 +2,10 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import _ from "lodash";
 
 import Header from "../../../components/Header";
-import Buttons from "../../../components/Utils/Button";
+import { Button } from "../../../components/Utils/Button";
 import Input from "../../../components/Utils/Input";
 import Footer from "../../../components/Footer";
 
@@ -122,7 +123,7 @@ export default function Questions ({ urls }: QuestionsProps) {
                         name="Why"
                         placeholder="Por que?"
                     />
-                    <Buttons.Button onClick={() => enviar()}>Enviar</Buttons.Button>
+                    <Button onClick={() => enviar()}>Enviar</Button>
                 </section>
             </Wrapper>
             <Footer />
@@ -142,7 +143,8 @@ export async function getStaticProps() {
         `https://api.unsplash.com/collections/IQmOGHF8H9U/photos/?per_page=30&client_id=${process.env.UNSPLASH_KEY!}`
     );
     
-    const urls = randomImage.data.map((url: Urls) => url.urls.regular);
+    const urlsResponse = randomImage.data.map((url: Urls) => url.urls.regular);
+    const urls = _.shuffle(urlsResponse)
 
     return {
       props: { urls },

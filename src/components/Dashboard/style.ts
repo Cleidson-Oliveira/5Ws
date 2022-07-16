@@ -48,24 +48,6 @@ export const MainContent = styled.div`
     }
 `;
 
-export const ItemListRoom = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-bottom: 1px solid ${Colors.color1};
-    margin-bottom: 1rem;
-    color: ${Colors.color1};
-    padding: .5rem;
-
-    label {
-        cursor: pointer;
-    }
-
-    button {
-        margin: 0;
-    }
-`;
-
 export const CardDescription = styled.article`
     width: 30%;
     display: flex;

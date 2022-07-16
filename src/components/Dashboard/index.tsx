@@ -4,19 +4,21 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 
-import { Wrapper, AsideContent, MainContent, ItemListRoom, CardDescription } from "./style";
+import { Wrapper, AsideContent, MainContent, CardDescription } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
-import Input, { UncrontroledInput } from "../Utils/Input";
+import Input from "../Utils/Input";
 import { Button, RoundedButton } from "../Utils/Button";
 import { Modal } from "../Modal";
-import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
 import { CommentField } from "../Utils/CommentField";
+import { ListRoom } from "../Utils/ListRooms";
 
+import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
 
 interface RoomsListType {
     data: {
         userName: string,
-        roomName: string
+        roomName: string,
+        roomCode: string
     },
     ref: {
         "@ref": {
@@ -53,7 +55,7 @@ export default function Dashboard () {
     const [descriptionsOnRoom, setDescriptionsOnRoom] = useState<DescriptionsListType[]>([]);
     const [descriptionsList, setDescriptionsList] = useState<DescriptionsListType[]>([]);
     const [newRoomName, setNewRoomName] = useState('');
-    const [roomName, setRoomName] = useState('');
+    const [roomCode, setRoomCode] = useState('');
     const [showNewRoom, setShowNewRoom] = useState(false);
     const [showEnterInRoom, setShowEnterInRoom] = useState(false);
     const [dashboardShowOptions, setDashboardShowOptions] = useState<"rooms" | "descriptions">("rooms");
@@ -64,8 +66,11 @@ export default function Dashboard () {
                 throw new Error ("Digite um nome para a sala");
             }
 
+            const roomCode = Math.random().toString(36).substring(2, 10);
+
             const userName = session?.user?.name as string;
             const createdData = await axios.post('api/rooms/create', {
+                roomCode,
                 createdBy: userName,
                 roomName: newRoomName,
             })
@@ -140,10 +145,11 @@ export default function Dashboard () {
     
     const enterInRoom = async () => {
         const rooms = await axios.post('api/rooms/verifyIfExistRoom', {
-            roomName
+            roomCode
         })
-        if (rooms.data.roomExistes) {
-            router.push(`/Rooms/app5Ws/${roomName}`);
+
+        if (rooms.data.roomExist) {
+            router.push(`/Rooms/app5Ws/${rooms.data.roomName}`);
         }
     }
 
@@ -176,6 +182,7 @@ export default function Dashboard () {
             ))
 
             comments.push(comment.value);
+            comment.value = "";
             
             const rooms = await axios.post('api/descriptions/addComments', {
                 ref,
@@ -248,9 +255,9 @@ export default function Dashboard () {
                             <Title>Entre em uma sala</Title>
                             <Input
                                 autofocus
-                                name="Nome da sala"
-                                placeholder="Digite o nome da sala"
-                                value={[roomName, setRoomName]}
+                                name="Código da sala"
+                                placeholder="Digite o código da sala"
+                                value={[roomCode, setRoomCode]}
                             />
                             <Button onClick={() => {
                                 enterInRoom();
@@ -310,28 +317,17 @@ export default function Dashboard () {
                     <section>
                         <SubTitle>Veja aqui suas salas</SubTitle>
                         <div>
-                        {
-                            (roomsList.length > 0) ? (
-                                <div>
-                                    {roomsList.map((room, i) => (
-                                        <ItemListRoom key={i}>
-                                            <label
-                                                onClick={() => getDescriptionsOnRoom(room.data.roomName)}
-                                            >{room.data.roomName}</label>
-                                            <RoundedButton onClick={() => {
-                                                deleteRoom(room.ref["@ref"].id)}}
-                                            >
-                                                <AiOutlineDelete />
-                                            </RoundedButton>
-                                        </ItemListRoom>
-                                    ))}
-                                </div>
+                            {(roomsList.length > 0) ? (
+                                <ListRoom
+                                    roomsList={roomsList}
+                                    deleteRoom={deleteRoom}
+                                    getDescriptionsOnRoom={getDescriptionsOnRoom}
+                                />
                             ) : (
                                     <p>
                                         Nenhuma sala encontrada
                                     </p>
-                            )
-                        }
+                            )}
                             <Button onClick={() => setShowNewRoom(!showNewRoom)}>
                                 Criar nova sala
                             </Button>

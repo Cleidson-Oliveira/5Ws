@@ -1,9 +1,7 @@
 import { Wrapper } from "./style";
-import Buttons from "../Button";
+import { RoundedButton} from "../Button";
 
-import { BsArrowRepeat } from 'react-icons/bs'
-
-const { RoundedButton } = Buttons;
+import { BsArrowRepeat } from 'react-icons/bs';
 
 interface ImageProps {
     src: string;
