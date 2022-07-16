@@ -38,16 +38,20 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
         <List>
             {roomsList.map((room, i) => (
                 <Wrapper key={i} >
-                    <div onClick={() => getDescriptionsOnRoom(room.data.roomName)} >
+                    <div>
                         <p>
-                            <span>Nome:</span>
-                            {room.data.roomName}
+                            Nome:
+                            <span onClick={() => getDescriptionsOnRoom(room.data.roomName)} >
+                                {room.data.roomName}
+                            </span>
                         </p>
                     </div>
                     <div title="Copy">
                         <p>
-                            <span>Código:</span>
-                            {room.data.roomCode}
+                            Código:
+                            <span onClick={() => copy(room.data.roomCode)}>
+                                {room.data.roomCode}
+                            </span>
                             <FaRegCopy 
                                 onClick={() => copy(room.data.roomCode)}
                             />

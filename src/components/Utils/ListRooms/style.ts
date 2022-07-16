@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    min-width: 200px;
     border: 1px solid ${Colors.color1};
     border-radius: .3rem;
     margin-bottom: 1rem;
@@ -25,10 +26,11 @@ export const Wrapper = styled.div`
             display: inline-flex;
             align-items: center;
             gap: .5rem;
+            font-weight: bold;
             
             span {
                 font-size: inherit;
-                font-weight: bold;
+                font-weight: normal;
                 cursor: pointer;
             }
 

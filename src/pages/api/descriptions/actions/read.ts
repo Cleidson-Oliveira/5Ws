@@ -43,7 +43,7 @@ export function HandlerGetAllDescriptionsByRoomName(req: NextApiRequest, res: Ne
         )
     )  
     .then((readedDescriptionsData) => {
-        res.status(201).json(readedDescriptionsData)
+        res.status(200).json(readedDescriptionsData)
     })
     .catch((err) => console.error(
         'Error: [%s] %s: %s',
