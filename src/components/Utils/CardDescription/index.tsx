@@ -1,7 +1,13 @@
 import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
 import { RoundedButton } from "../Button";
 import { CommentField } from "../CommentField";
-import { Wrapper } from "./style";
+import { CardHeader, CardMain, Comment, Wrapper } from "./style";
+
+interface Comment {
+    name: string,
+    urlImage: string,
+    comment: string
+}
 
 interface DescriptionsListType {
     data: {
@@ -13,7 +19,7 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
-        comments: string[],
+        comments: Comment[],
     },
     ref: {
         "@ref": {
@@ -23,7 +29,7 @@ interface DescriptionsListType {
 } 
 
 interface CardDescriptionProps {
-    addNewCommentOnDescription: (ref: string, comments: string[]) => void,
+    addNewCommentOnDescription: (ref: string, comments: Comment[]) => void,
     deleteDescription?: (ref: string) => void,
     desc: DescriptionsListType,
 }
@@ -31,25 +37,39 @@ interface CardDescriptionProps {
 export function CardDescription ({ desc, addNewCommentOnDescription, deleteDescription }: CardDescriptionProps) {
     return (
         <Wrapper>
-            <img src={desc.data.url} />
-            <h4>{desc.data.nickName}</h4>
-            <div>
-                <p>Who: {desc.data.who}</p>
-                <p>What: {desc.data.what}</p>
-                <p>When: {desc.data.when}</p>
-                <p>Where: {desc.data.where}</p>
-                <p>Why: {desc.data.why}</p>
-            </div>
-            <div>
+            <CardHeader>
+                <img src={desc.data.url} />
+                {deleteDescription && 
+                <RoundedButton onClick={() => {
+                    deleteDescription(desc.ref["@ref"].id)}}
+                >
+                    <AiOutlineDelete />
+                </RoundedButton>}
+            </CardHeader>
+            <CardMain>
+                <h4>{desc.data.nickName}</h4>
+                <div>
+                    <p>Who: {desc.data.who}</p>
+                    <p>What: {desc.data.what}</p>
+                    <p>When: {desc.data.when}</p>
+                    <p>Where: {desc.data.where}</p>
+                    <p>Why: {desc.data.why}</p>
+                </div>
                 <h4>Comentários</h4>
-                {
-                desc.data.comments.length > 0
-                ? desc.data.comments.map((comment, i) => (
-                    <p key={i}>{comment}</p>
-                ))
-                : (<p>Que tal incluir um comentário?</p>)
-                }
-            </div>
+                <div>
+                    {
+                        desc.data.comments.length > 0
+                        ? desc.data.comments.map((comment, i) => (
+                            <Comment key={i}>
+                                <img src={comment.urlImage}/>
+                                <h5>{comment.name}</h5>
+                                <p>{comment.comment}</p>
+                            </Comment>
+                            ))
+                            : (<p>Que tal incluir um comentário?</p>)
+                        }
+                </div>
+            </CardMain>    
             <CommentField>
                 <input 
                     id={`comment-${desc.ref["@ref"].id}`}
@@ -60,13 +80,7 @@ export function CardDescription ({ desc, addNewCommentOnDescription, deleteDescr
                 >
                     <AiOutlineComment />
                 </RoundedButton>
-            </CommentField>
-            {/* <RoundedButton onClick={() => {
-                deleteDescription(desc.ref["@ref"].id)}}
-            >
-                <AiOutlineDelete />
-            </RoundedButton> */}
-                
+            </CommentField>                
         </Wrapper>
     )
 }

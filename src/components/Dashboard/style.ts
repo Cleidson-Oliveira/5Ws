@@ -32,6 +32,8 @@ export const MainContent = styled.div`
     background-color: ${Colors.color4};
 
     section {
+        display: flex;
+        flex-wrap: wrap;
         box-sizing: border-box;
         padding: 2rem 3rem;
         border: 1px solid ${Colors.color5};

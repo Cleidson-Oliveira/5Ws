@@ -16,6 +16,12 @@ import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
 import { Profile } from "../Utils/Profile";
 import { CardDescription } from "../Utils/CardDescription";
 
+interface Comment {
+    name: string,
+    urlImage: string,
+    comment: string
+}
+
 interface RoomsListType {
     data: {
         userName: string,
@@ -39,7 +45,7 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
-        comments: string[],
+        comments: Comment[],
     },
     ref: {
         "@ref": {
@@ -166,7 +172,7 @@ export default function Dashboard ({
         setDescriptionsOnRoom([])
     }
 
-    const addNewCommentOnDescription = async (ref: string, prevComments: string[]) => {
+    const addNewCommentOnDescription = async (ref: string, prevComments: Comment[]) => {
         try {
             const comment = document.getElementById(`comment-${ref}`) as HTMLInputElement
             const comments = prevComments;
@@ -182,7 +188,11 @@ export default function Dashboard ({
                 ))
             ))
 
-            comments.push(comment.value);
+            comments.push({
+                name: session?.user?.name as string,
+                urlImage: session?.user?.image as string,
+                comment: comment.value
+            });
             comment.value = "";
             
             const rooms = await axios.post('api/descriptions/addComments', {
