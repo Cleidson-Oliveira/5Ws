@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import _ from "lodash";
 
-import Header from "../../../components/Header";
-import { Button } from "../../../components/Utils/Button";
-import Input from "../../../components/Utils/Input";
-import Footer from "../../../components/Footer";
+import Header from "../../components/Header";
+import { Button } from "../../components/Utils/Button";
+import Input from "../../components/Utils/Input";
+import Footer from "../../components/Footer";
 
-import { GlobalStyle } from "../../../styles/Global";
+import { GlobalStyle } from "../../styles/Global";
 import Wrapper from "./style";
-import Image from "../../../components/Utils/ImageWillBeDescribed";
+import Image from "../../components/Utils/ImageWillBeDescribed";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Title } from "../../../components/Utils/Title/intex";
+import { Title } from "../../components/Utils/Title/intex";
 
 interface QuestionsProps {
     urls: string[]

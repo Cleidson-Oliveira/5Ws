@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 
-import { Wrapper, AsideContent, MainContent, CardDescription } from "./style";
+import { Wrapper, AsideContent, MainContent } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
 import { Button, RoundedButton } from "../Utils/Button";
@@ -13,6 +13,8 @@ import { CommentField } from "../Utils/CommentField";
 import { ListRoom } from "../Utils/ListRooms";
 
 import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
+import { Profile } from "../Utils/Profile";
+import { CardDescription } from "../Utils/CardDescription";
 
 interface RoomsListType {
     data: {
@@ -46,14 +48,22 @@ interface DescriptionsListType {
     }
 }
 
-export default function Dashboard () {
+interface DashboardProps {
+    descriptionsList: DescriptionsListType[],
+    roomsList: RoomsListType[],
+}
+
+export default function Dashboard ({
+    descriptionsList: descriptionsListProps,
+    roomsList: roomListProps
+}: DashboardProps) {
 
     const router = useRouter();
     const {data: session} = useSession();
 
-    const [roomsList, setRoomsList] = useState<RoomsListType[]>([]);
+    const [roomsList, setRoomsList] = useState<RoomsListType[]>(roomListProps);
     const [descriptionsOnRoom, setDescriptionsOnRoom] = useState<DescriptionsListType[]>([]);
-    const [descriptionsList, setDescriptionsList] = useState<DescriptionsListType[]>([]);
+    const [descriptionsList, setDescriptionsList] = useState<DescriptionsListType[]>(descriptionsListProps);
     const [newRoomName, setNewRoomName] = useState('');
     const [roomCode, setRoomCode] = useState('');
     const [showNewRoom, setShowNewRoom] = useState(false);
@@ -89,13 +99,6 @@ export default function Dashboard () {
             alert(err)
         }
     }
-    
-    const getUserRooms = async () => {
-        const rooms = await axios.post('api/rooms/readAll', {
-            userName: session?.user?.name,
-        });
-        setRoomsList(rooms.data.data)
-    }
 
     const deleteRoom = async (ref: string) => {
         try {
@@ -128,13 +131,6 @@ export default function Dashboard () {
             console.log(err)
         }
     }
-
-    const getUserDescriptions = async () => {
-        const desc = await axios.post('api/descriptions/readByNickName', {
-            userName: session?.user?.name,
-        });
-        setDescriptionsList(desc.data.data)
-    }
     
     const getDescriptionsOnRoom = async (roomName: string) => {
         const desc = await axios.post('api/descriptions/readByRoomName', {
@@ -154,7 +150,7 @@ export default function Dashboard () {
         })
 
         if (rooms.data.roomExist) {
-            router.push(`/Rooms/app5Ws/${rooms.data.roomName}`);
+            router.push(`/app5Ws/${rooms.data.roomName}`);
         }
     }
 
@@ -203,15 +199,11 @@ export default function Dashboard () {
         setDashboardShowOptions(option)
     }
 
-    useEffect(() => {
-        getUserRooms();
-        getUserDescriptions();
-    }, [])
-
     return (
         <Wrapper>
             <AsideContent>
                 <Title>Dashboard</Title>
+                {/* <Profile /> */}
                 <Button 
                     onClick={() => {
                         handlerDashboardShowOptions("rooms")
@@ -278,40 +270,12 @@ export default function Dashboard () {
                     >
                         <section>
                             {
-                                descriptionsOnRoom.map(({data, ref}) => (
-                                    <CardDescription key={data.url}>
-                                        <img src={data.url} />
-                                        <h4>{data.nickName}</h4>
-                                        <div>
-                                            <p>Who: {data.who}</p>
-                                            <p>What: {data.what}</p>
-                                            <p>When: {data.when}</p>
-                                            <p>Where: {data.where}</p>
-                                            <p>Why: {data.why}</p>
-                                        </div>
-                                        <div>
-                                            <h4>Comentários</h4>
-                                            {
-                                            data.comments.length > 0
-                                            ? data.comments.map((comment, i) => (
-                                                <p key={i}>{comment}</p>
-                                            ))
-                                            : (<p>Que tal incluir um comentário?</p>)
-                                            }
-                                        </div>
-
-                                        <CommentField>
-                                            <input 
-                                                id={`comment-${ref["@ref"].id}`}
-                                                placeholder="Adicione um comentário"
-                                            />                                        
-                                            <RoundedButton
-                                                onClick={() => addNewCommentOnDescription(ref["@ref"].id, data.comments)}
-                                            >
-                                                <AiOutlineComment />
-                                            </RoundedButton>
-                                        </CommentField>
-                                    </CardDescription>
+                                descriptionsOnRoom.map((desc, i) => (
+                                    <CardDescription
+                                        key={i}
+                                        desc={desc}
+                                        addNewCommentOnDescription={addNewCommentOnDescription}
+                                    />
                                 ))
                             }
                         </section>
@@ -346,44 +310,12 @@ export default function Dashboard () {
                         <div>
                             {descriptionsList.length > 0
                                 ? descriptionsList.map((desc, i) => (
-                                    <CardDescription key={i}>
-                                        <img src={desc.data.url} />
-                                        <h4>{desc.data.nickName}</h4>
-                                        <div>
-                                            <p>Who: {desc.data.who}</p>
-                                            <p>What: {desc.data.what}</p>
-                                            <p>When: {desc.data.when}</p>
-                                            <p>Where: {desc.data.where}</p>
-                                            <p>Why: {desc.data.why}</p>
-                                        </div>
-                                        <div>
-                                            <h4>Comentários</h4>
-                                            {
-                                            desc.data.comments.length > 0
-                                            ? desc.data.comments.map((comment, i) => (
-                                                <p key={i}>{comment}</p>
-                                            ))
-                                            : (<p>Que tal incluir um comentário?</p>)
-                                            }
-                                        </div>
-                                        <CommentField>
-                                            <input 
-                                                id={`comment-${desc.ref["@ref"].id}`}
-                                                placeholder="Adicione um comentário"
-                                            />                                        
-                                            <RoundedButton
-                                                onClick={() => addNewCommentOnDescription(desc.ref["@ref"].id, desc.data.comments)}
-                                            >
-                                                <AiOutlineComment />
-                                            </RoundedButton>
-                                        </CommentField>
-                                        <RoundedButton onClick={() => {
-                                            deleteDescription(desc.ref["@ref"].id)}}
-                                        >
-                                            <AiOutlineDelete />
-                                        </RoundedButton>
-                                            
-                                    </CardDescription>
+                                    <CardDescription
+                                        key={i}
+                                        desc={desc}
+                                        addNewCommentOnDescription={addNewCommentOnDescription}
+                                        deleteDescription={deleteDescription}
+                                    />
                                 ))
                                 : (
                                     <p>

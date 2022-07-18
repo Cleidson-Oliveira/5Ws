@@ -37,34 +37,5 @@ export const MainContent = styled.div`
         border: 1px solid ${Colors.color5};
         border-radius: 5px;
         background-color:  ${Colors.color5};
-        
-        div {
-            img {
-                width: 20%;
-                margin: .5rem;
-                cursor: pointer;
-            }
-        }
-    }
-`;
-
-export const CardDescription = styled.article`
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    border-radius: .3rem;
-    background: #ffffff50;
-
-    img {
-        width: 60%;
-    }
-
-    p {
-        margin: 10px 0;
-    }
-
-    button {
-        margin-top: .3rem;
     }
 `;

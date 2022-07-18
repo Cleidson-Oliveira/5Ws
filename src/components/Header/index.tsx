@@ -32,8 +32,8 @@ export default function Header ({ page }: HeaderProps) {
                     <li className={page == "Home" ? "active" : ""}>
                         <Link href={"/"}>Home</Link>
                     </li>
-                    <li className={page == "Rooms" ? "active" : ""}>
-                        <Link href={"/Rooms"}>Salas</Link>
+                    <li className={page == "Dashboard" ? "active" : ""}>
+                        <Link href={"/Dashboard"}>Dashboard</Link>
                     </li>
                     <li className={page == "Contact" ? "active" : ""}>
                         <Link href={"/Contact"}>Contato</Link>

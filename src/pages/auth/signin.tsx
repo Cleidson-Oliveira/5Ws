@@ -23,7 +23,7 @@ export default function SignIn({ providers }: SignInProps) {
 
     useEffect(()=>{
         if (session?.user) {
-            router.push("/Rooms");
+            router.push("/Dashboard");
         }
     }, [session])
 
