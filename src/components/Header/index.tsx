@@ -35,9 +35,6 @@ export default function Header ({ page }: HeaderProps) {
                     <li className={page == "Dashboard" ? "active" : ""}>
                         <Link href={"/Dashboard"}>Dashboard</Link>
                     </li>
-                    <li className={page == "Contact" ? "active" : ""}>
-                        <Link href={"/Contact"}>Contato</Link>
-                    </li>
                     <li className={session ? "signout" : "signin"}>
                         {
                             session 
