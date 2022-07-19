@@ -3,7 +3,7 @@ import { RoundedButton } from "../Button";
 import { CommentField } from "../CommentField";
 import { CardHeader, CardMain, Comment, Wrapper } from "./style";
 
-interface Comment {
+interface CommentType {
     name: string,
     urlImage: string,
     comment: string
@@ -19,7 +19,7 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
-        comments: Comment[],
+        comments: CommentType[],
     },
     ref: {
         "@ref": {
@@ -29,7 +29,7 @@ interface DescriptionsListType {
 } 
 
 interface CardDescriptionProps {
-    addNewCommentOnDescription: (ref: string, comments: Comment[]) => void,
+    addNewCommentOnDescription: (ref: string, comments: CommentType[]) => void,
     deleteDescription?: (ref: string) => void,
     desc: DescriptionsListType,
 }
