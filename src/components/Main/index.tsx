@@ -1,7 +1,22 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
 import { Wrapper } from "./style";
+import { Button } from "../Utils/Button";
 
 export default function Main () {
+
+    const router = useRouter();
+    const {data: session} = useSession();
+
+    const goToDashboard = () => {
+        if (session?.user == null || session?.user == undefined) {
+            router.push("/auth/signin");
+        } else {
+            router.push("/Dashboard");
+        }
+    }
 
     useEffect(() => {    
         const sectionsWillAnimated = document.querySelectorAll(".animate");
@@ -50,6 +65,13 @@ export default function Main () {
                         <b>Why?</b><br /> <i>Meditar eleva o estado de espírito.</i>
                     </span>
                 </p>
+            </section>
+
+            <section>
+                <h2>Tente você também!</h2>
+                <Button onClick={() => { goToDashboard() }} >
+                    Sign In
+                </Button>
             </section>
             
         </Wrapper>

@@ -4,7 +4,7 @@ import { Colors } from "../../styles/Colors";
 export const Wrapper = styled.main`
     display: grid;
     grid-template-columns: repeat(12, 8%);
-    grid-template-rows: 150px 300px 150px 350px;
+    grid-template-rows: 150px 300px 150px 350px 150px;
     justify-content: center;
     width: 100%;
     background-color: ${Colors.color5};
@@ -38,6 +38,7 @@ export const Wrapper = styled.main`
             transform: translateX(-150px);
             transition: opacity .5s ease, transform .5s ease;
             opacity: 0;
+            margin-top: 1rem;
             
             h2 {
                 font-size: 1.5rem;
@@ -117,6 +118,21 @@ export const Wrapper = styled.main`
                 opacity: 1;
                 transform: translateX(0);
             }
+        }
+    }
+
+    & section:nth-child(5) {
+        grid-column: 4/10;
+        grid-row: 5/6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+
+        h2 {
+            line-height: 2rem;
+            font-size: 1.5rem;
         }
     }
 `;
