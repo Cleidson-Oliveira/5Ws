@@ -10,7 +10,7 @@ export default function Main () {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("anima"))
             });
-            observer.observe(section!)
+            observer.observe(section)
         })
     }, [])
 
@@ -18,47 +18,36 @@ export default function Main () {
         <Wrapper>
             <h1>Os 5Ws são perguntas norteadoras que ajudam no processo criativo e/ou investigativo.</h1>
 
-            <section className="animate" id="1">
-                <img src="https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090__340.jpg"/>
-                <p>Ao iniciar projetos é importante ter estas perguntas respondidas, pois estas repostas poderão guiar o projeto.</p>
-            </section>
-
-            <section className="animate" id="2">
-                <p>Uma investigação policial pode se iniciar com essas perguntas, e responde-las pode ser um passo importante para a resolução do caso.</p>
-                <img src="https://cdn.pixabay.com/photo/2016/06/15/10/10/potatoes-1458569_960_720.jpg"/>
-            </section>
-
-            <section className="animate" id="3">
-                <article>
+            <section className="animate">
+                <div>
+                    <h2>A técnica 5Ws no aprendizado de línguas</h2>
                     <p>
-                        Os 5Ws são perguntas básicas, úteis para descrição de situações, e com isso uma ótima ferramenta para desenvolver essa habilidade.
+                        Descrever situações, para quem está aprendendo um novo idioma, ajuda a criar bagagem de vocabulário para aplicar em situações do cotidiano.
+                        Os 5Ws ou <i>word questions</i> são perguntas básicas, úteis para descrição de situações, e com isso uma ótima ferramenta para desenvolver essa habilidade.
                     </p>
-                </article>
-
-                <article>
-                <p>
-                    Descrever situações em outros idiomas ajuda a criar bagagem de vocabulário para aplicar em situações do cotidiano.
-                </p>
-                </article>
+                </div>
+                <img src="https://cleidson.s3.sa-east-1.amazonaws.com/5ws-min.png"/>
             </section>
+
+            <h2>Como você descreveria a imagem abaixo na língua que está aprendendo?</h2>
   
-            <section className="animate" id="4">
+            <section className="animate">
                 <img src="https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg" />
                 <p>
                     <span>
-                        <b>Who:</b> Mulher indiana, Hadija.
+                        <b>Who?</b><br /> <i>Mulher indiana, Hadija.</i>
                     </span>
                     <span>
-                        <b>What:</b> Ela está meditando.
+                        <b>What?</b><br /> <i>Ela está meditando.</i>
                     </span>
                     <span>
-                        <b>When:</b> Provavelmente em uma tarde de verão.
+                        <b>When?</b><br /> <i>Provavelmente em uma tarde de verão.</i>
                     </span>
                     <span>
-                        <b>Where:</b> O local é proxímo de um rio, com árvores ao fundo.
+                        <b>Where?</b><br /> <i>O local é proxímo de um rio, com árvores ao fundo.</i>
                     </span>
                     <span>
-                        <b>Why:</b> Meditar eleva o estado de espírito.
+                        <b>Why?</b><br /> <i>Meditar eleva o estado de espírito.</i>
                     </span>
                 </p>
             </section>

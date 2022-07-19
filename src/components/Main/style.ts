@@ -3,120 +3,77 @@ import { Colors } from "../../styles/Colors";
 
 export const Wrapper = styled.main`
     display: grid;
-    grid-template-columns: repeat(6, 16%);
-    grid-template-rows: 150px 250px 250px 200px 350px;
-    grid-column-gap: 1fr;
+    grid-template-columns: repeat(12, 8%);
+    grid-template-rows: 150px 300px 150px 350px;
     justify-content: center;
     width: 100%;
     background-color: ${Colors.color5};
     color: ${Colors.color1};
     padding: 40px 0;
 
-    img {
-        width: 50%;
-    }
-
-    h1 {
-        grid-column: 2/6;
+    & > h1 {
+        grid-column: 2/12;
         grid-row: 1/2;
         font-size: 2rem;
         text-align: center;
     }
+    
+    & > h2 {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        grid-column: 2/12;
+        grid-row: 3/4;
+        font-size: 1.5rem;
+    }
 
-    section {
+    & section:nth-child(2) {
         display: flex;
         align-items: flex-start;
-
-        p {
-            display: inline-block;
-            font-size: 1.3rem;
-        }
-    }
-    
-    & section:nth-child(2) {
-        grid-column: 2/5;
+        justify-content: space-between;
+        grid-column: 2/12;
         grid-row: 2/3;
-        opacity: 0;
-        transform: translateX(200px);
-        transition: all .5s ease;
         
-        &.anima {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        img {
-            margin-right: 20px;
-        }
-    }
-
-    & section:nth-child(3) {
-        grid-column: 3/6;
-        grid-row: 3/4;
-        opacity: 0;
-        transform: translateX(-200px);
-        transition: all .5s ease;
-        
-        &.anima {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        p {
-            text-align: right;
-        }
-
-        img {
-            margin-left: 20px;
-        }
-    }
-
-    & section:nth-child(4) {
-        grid-column: 2/6;
-        grid-row: 4/5;
-        justify-content: space-around;
-        
-        &.anima {
-
-            article {
-                transform: scale(1, 1);
-                opacity: 1;
-            }
-            
-        }
-
-        article {
-            box-sizing: border-box;
-            height: 80%;
-            width: 40%;
-            padding: 30px;
-            border-radius: 10px;
-            background-color: ${Colors.blue4};
-            text-align: center;
+        div {
+            transform: translateX(-150px);
+            transition: opacity .5s ease, transform .5s ease;
             opacity: 0;
-            transform: scale(.5, .5);
-            transition: all .5s ease;
+            
+            h2 {
+                font-size: 1.5rem;
+                line-height: 4rem;
+                text-transform: uppercase;
+                font-weight: 100;
+            }
             
             p {
-                font-size: 1.1rem;
-                padding: 0;
-                color: ${Colors.color3};
+                font-size: 1.2rem;
+                line-height: 1.5rem;
             }
         }
-    }
-
-    & section:nth-child(5) {
-        grid-column: 1/7;
-        grid-row: 5/6;
-        display: flex;
-        justify-content: space-evenly;
-
+        
+        img {
+            width: 40%;
+            opacity: 0;
+            transform: translateX(150px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        
         &.anima {
-            p, img {
+            div, img {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
+    }
+
+    & section:nth-child(4) {
+        grid-column: 1/13;
+        grid-row: 4/5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 50px;
 
         p {
             display: flex;
@@ -130,20 +87,36 @@ export const Wrapper = styled.main`
             span {
                 display: block;
                 font-size: 1.4rem;
+                
+                & ~ span {
+                    margin-top: 1rem;
+                }
 
                 b {
                     font-size: 1.4rem;
+                    font-weight: 100;
+                }
+
+                i {
+                    margin-left: .5rem;
                 }
             }
         }
 
         img {
+            height: 100%;
             max-height: 350px;
             width: auto;
             opacity: 0;
             transform: translateX(-200px);
             transition: all .5s ease;
         }
-    }
 
+        &.anima {
+            p, img {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
 `;
