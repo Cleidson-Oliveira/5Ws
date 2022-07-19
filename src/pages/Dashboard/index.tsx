@@ -12,6 +12,12 @@ import Footer from "../../components/Footer";
 
 import { GlobalStyle } from "../../styles/Global";
 
+interface Comment {
+    name: string,
+    urlImage: string,
+    comment: string
+}
+
 interface RoomsListType {
     data: {
         userName: string,
@@ -35,7 +41,7 @@ interface DescriptionsListType {
         when: string,
         where: string,
         why: string,
-        comments: string[],
+        comments: Comment[],
     },
     ref: {
         "@ref": {

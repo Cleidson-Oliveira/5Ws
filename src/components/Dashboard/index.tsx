@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -7,13 +7,9 @@ import axios from "axios";
 import { Wrapper, AsideContent, MainContent } from "./style";
 import { SubTitle, Title } from "../Utils/Title/intex";
 import Input from "../Utils/Input";
-import { Button, RoundedButton } from "../Utils/Button";
+import { Button } from "../Utils/Button";
 import { Modal } from "../Modal";
-import { CommentField } from "../Utils/CommentField";
 import { ListRoom } from "../Utils/ListRooms";
-
-import { AiOutlineComment, AiOutlineDelete } from "react-icons/ai";
-import { Profile } from "../Utils/Profile";
 import { CardDescription } from "../Utils/CardDescription";
 
 interface Comment {
