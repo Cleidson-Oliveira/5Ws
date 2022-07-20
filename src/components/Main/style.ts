@@ -136,6 +136,8 @@ export const Wrapper = styled.main`
     }
 
     @media only screen and (max-width: 992px) {
+        grid-template-rows: 120px 300px 150px 350px 150px;
+
         & section:nth-child(2) {
         
             div {
