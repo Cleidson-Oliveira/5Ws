@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     width: 100%;
-    min-height: 400px;
     position: relative;
     
     button {
@@ -16,6 +15,12 @@ export const Wrapper = styled.div`
 
         & svg {
             font-size: 1.5rem;
+        }
+    }
+    @media only screen and (max-width: 700px) {
+        button {
+            width: 2rem;
+            height: 2rem;
         }
     }
 `;

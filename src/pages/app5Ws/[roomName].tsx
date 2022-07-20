@@ -10,7 +10,7 @@ import Input from "../../components/Utils/Input";
 import Footer from "../../components/Footer";
 
 import { GlobalStyle } from "../../styles/Global";
-import Wrapper from "./style";
+import { RoomBy, Wrapper } from "./style";
 import Image from "../../components/Utils/ImageWillBeDescribed";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -89,9 +89,9 @@ export default function Questions ({ urls }: QuestionsProps) {
             <Head><title>5Ws | Salas</title></Head>
             <GlobalStyle />
             <Header page="Rooms"/>
-            <Wrapper>
+            <RoomBy>
                 <Title>{roomName}</Title>
-            </Wrapper>
+            </RoomBy>
             <Wrapper>
                 <section>
                     <Image src={currentUrl} onChangeCurrentUrl={handleCurrentUrl}/>
