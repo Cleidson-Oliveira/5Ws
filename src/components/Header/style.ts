@@ -56,15 +56,16 @@ export const Wrapper = styled.header`
         }
 
     }
-    nav {
-        button {
-            display: none;
-        }
+    nav > button, .buttonClose {
+        display: none;
     }
 
     @media only screen and (max-width: 600px){
+        .buttonClose {
+            display: block;
+        }
         nav {
-            button {
+            & > button {
                 display: block;
                 background: none;
                 border: none;
@@ -120,6 +121,10 @@ export const Wrapper = styled.header`
 
                 li.signout, li.signin {
                     grid-row: 11/12;
+                    
+                    button {
+                        display: block;
+                    }
                 }
             }
 

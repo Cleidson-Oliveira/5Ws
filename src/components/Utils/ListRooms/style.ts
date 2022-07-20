@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { Colors } from "../../../styles/Colors";
 
 export const List = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
 `;
 

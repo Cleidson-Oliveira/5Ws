@@ -275,6 +275,7 @@ export default function Dashboard ({
                         functions={handlerDescriptionsOnRoomList}
                     >
                         <section>
+                            <div className="cardList">
                             {
                                 descriptionsOnRoom.map((desc, i) => (
                                     <CardDescription
@@ -284,6 +285,7 @@ export default function Dashboard ({
                                     />
                                 ))
                             }
+                            </div>
                         </section>
                     </Modal>
                 )}
@@ -313,7 +315,7 @@ export default function Dashboard ({
                 {dashboardShowOptions == "descriptions" && (
                     <section>
                         <SubTitle>Veja aqui suas descrições</SubTitle>
-                        <div>
+                        <div className="cardList">
                             {descriptionsList.length > 0
                                 ? descriptionsList.map((desc, i) => (
                                     <CardDescription
@@ -329,10 +331,10 @@ export default function Dashboard ({
                                     </p>
                                 )
                             }
-                            <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
-                                Entre em uma sala
-                            </Button>
                         </div>
+                        <Button onClick={() => setShowEnterInRoom(!showEnterInRoom)}>
+                            Entre em uma sala
+                        </Button>
                     </section>
                 )}
             </MainContent>
