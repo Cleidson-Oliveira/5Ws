@@ -27,4 +27,27 @@ export const Wrapper = styled.div`
         text-align: center;
         text-shadow: #7a7777 2px 2px 3px;
     }
+
+    @media only screen and (max-width: 992px) {
+
+        p {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        height: 50vh;
+
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        height: 45vh;
+
+        p {
+            font-size: 1.5rem;
+        }
+    }
 `;

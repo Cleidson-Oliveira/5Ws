@@ -5,6 +5,9 @@ import { Wrapper } from "./style";
 import { Avatar } from "../Utils/Avatar";
 import { useEffect, useState } from "react";
 
+import { FaBars } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
+
 interface HeaderProps {
     page: string,
 }
@@ -14,6 +17,11 @@ export default function Header ({ page }: HeaderProps) {
     const { data: session } = useSession();
 
     const [avatarImage, setAvatarImage] = useState('');
+    const [showMenu, setShowMenu] = useState<boolean>(false);
+
+    const handlerShowMenu = () => {
+        setShowMenu(prevState => !prevState)
+    }
 
     useEffect(() => {
         if (session?.user?.image != undefined && session?.user?.image != null) {
@@ -28,7 +36,12 @@ export default function Header ({ page }: HeaderProps) {
             </svg>
 
             <nav>
-                <ul>
+                <ul className={ showMenu ? "show" : "hide" }>
+                    <li className="buttonClose">
+                        <button onClick={() => {handlerShowMenu()}}>
+                            <MdClose />
+                        </button>
+                    </li>
                     <li className={page == "Home" ? "active" : ""}>
                         <Link href={"/"}>Home</Link>
                     </li>
@@ -51,6 +64,9 @@ export default function Header ({ page }: HeaderProps) {
                         }
                     </li>
                 </ul>
+                <button onClick={() => {handlerShowMenu()}}>
+                    <FaBars />
+                </button>
             </nav>
         </Wrapper>
     )

@@ -54,5 +54,75 @@ export const Wrapper = styled.header`
             }
 
         }
+
+    }
+    nav {
+        button {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px){
+        nav {
+            button {
+                display: block;
+                background: none;
+                border: none;
+                padding: 1rem;
+
+                svg {
+                    font-size: 2rem;
+                    color: ${Colors.color3};
+                }
+            }
+
+            ul.hide {
+                display: none;
+            }
+            
+            ul.show {
+                display: grid;
+                justify-items: center;
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(12, 1fr);
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background: ${Colors.color1};
+                z-index: 10;
+
+                li:nth-child(1){
+                    grid-row: 1/3;
+                    justify-self: end;
+                    margin: 2rem;
+                    
+                    button {
+                        background: none;
+                        border: none;
+                        padding: 1rem;
+
+                        svg {
+                            font-size: 2rem;
+                            color: ${Colors.color3};
+                        }
+                    }
+                }
+                
+                li:nth-child(2){
+                    grid-row: 6/7;
+                }
+                
+                li:nth-child(3){
+                    grid-row: 7/8;
+                }
+
+                li.signout, li.signin {
+                    grid-row: 11/12;
+                }
+            }
+
+        }
     }
 `;
