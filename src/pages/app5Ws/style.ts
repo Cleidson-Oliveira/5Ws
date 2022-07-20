@@ -1,12 +1,20 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     padding: 2.5rem;
+
+    & > div.roomBy {
+        width: 100%;
+        padding-left: 3rem;
+    }
 
     section {
         width: 50%;
         padding: 1rem;
+        box-sizing: border-box;
 
         img {
             width: 100%;
@@ -16,10 +24,15 @@ export const Wrapper = styled.div`
     @media only screen and (max-width: 700px) {
         flex-direction: column;
         padding: .3rem;
+
+        & > div.roomBy {
+            padding-left: 2rem;
+        }
         
         section {
             width: 100%;
             box-sizing: border-box;
+            padding: .5rem 1rem 1rem;
             
             div {
 
@@ -32,18 +45,4 @@ export const Wrapper = styled.div`
     }
 `;
 
-export const RoomBy = styled.div`
-    display: flex;
-    align-items: flex-end;
-    width: 100%;
-    height: 4rem;
-    padding-left: 4rem;
-
-    h1 {
-        margin: 0;
-    }
-
-    @media only screen and (max-width: 700px) {
-        padding-left: 2rem;
-    }
-`;
+export default Wrapper;

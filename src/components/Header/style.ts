@@ -54,8 +54,8 @@ export const Wrapper = styled.header`
             }
 
         }
-
     }
+    
     nav > button, .buttonClose {
         display: none;
     }
