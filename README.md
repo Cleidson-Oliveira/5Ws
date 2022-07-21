@@ -15,7 +15,6 @@
 <br />
 <hr />
 <br />
-<br />
 
 ## Table of Contents
 
