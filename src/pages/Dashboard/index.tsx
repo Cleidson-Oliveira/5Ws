@@ -11,6 +11,8 @@ import Dashboard from "../../components/Dashboard";
 import Footer from "../../components/Footer";
 
 import { GlobalStyle } from "../../styles/Global";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface Comment {
     name: string,
@@ -59,6 +61,27 @@ export default function Rooms ({ descriptionsList, roomsList }: DashboardProps) 
 
     const session = useSession();
 
+    const toastControler = (type: string, message: string) => {
+
+        switch (type) {
+            case "error":
+                toast.error(message);
+                break;
+
+            case "success":
+                toast.success(message);
+                break;
+
+            case "info":
+                toast.info(message)
+                break;
+                
+            default:
+                break;
+        }
+
+    }
+
     return (
         <>
             <Head><title>5Ws | Dashboard</title></Head>
@@ -70,9 +93,11 @@ export default function Rooms ({ descriptionsList, roomsList }: DashboardProps) 
                 : <Dashboard 
                     descriptionsList={descriptionsList}
                     roomsList={roomsList}
+                    toastControler={toastControler}
                 />
             }
             <Footer />
+            <ToastContainer />
         </>
     )
 }

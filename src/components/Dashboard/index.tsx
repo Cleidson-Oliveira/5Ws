@@ -53,11 +53,13 @@ interface DescriptionsListType {
 interface DashboardProps {
     descriptionsList: DescriptionsListType[],
     roomsList: RoomsListType[],
+    toastControler: (type: string, message: string) => void,
 }
 
 export default function Dashboard ({
     descriptionsList: descriptionsListProps,
-    roomsList: roomListProps
+    roomsList: roomListProps,
+    toastControler
 }: DashboardProps) {
 
     const router = useRouter();
@@ -75,7 +77,7 @@ export default function Dashboard ({
     const createNewRoom = async () => {
         try {
             if (newRoomName == '') {
-                throw new Error ("Digite um nome para a sala");
+                throw new Error ("Digite um nome para a sala!");
             }
 
             const roomCode = Math.random().toString(36).substring(2, 10);
@@ -88,7 +90,7 @@ export default function Dashboard ({
             })
 
             if (createdData.data.created == false) {
-                throw new Error ("Nome da sala já existe");
+                throw new Error ("Nome da sala já existe!");
             }
             
             setRoomsList(prevState => ([...prevState, 
@@ -97,8 +99,12 @@ export default function Dashboard ({
                     ref: createdData.data.ref
                 }
             ]))
+
+            toastControler("success", "Sala criada com sucesso!");
+
         } catch (err) {
-            alert(err)
+            const message = (err as Error).message as string
+            toastControler("error", message)
         }
     }
 
@@ -113,8 +119,34 @@ export default function Dashboard ({
                     return roomWillBeDeleted.ref["@ref"].id != ref
                 })
             ))
-        } catch (err){
+
+            toastControler("success", "Sala removida com sucesso!");
+        } catch (err) {
             console.log(err)
+        }
+    }
+
+    const getDescriptionsOnRoom = async (roomName: string) => {
+        const desc = await axios.post('api/descriptions/readByRoomName', {
+            roomName
+        });
+        if (desc.data.data.length > 0) {
+            setDescriptionsOnRoom(desc.data.data)
+        } else {
+            toastControler("info", "Não existem descrições nesta sala!")
+        }
+
+    }
+        
+    const enterInRoom = async () => {
+        const rooms = await axios.post('api/rooms/verifyIfExistRoom', {
+            roomCode
+        })
+
+        if (rooms.data.roomExist) {
+            router.push(`/app5Ws/${rooms.data.roomName}`);
+        } else {
+            toastControler("error", "Código de sala inválido!")
         }
     }
     
@@ -129,49 +161,19 @@ export default function Dashboard ({
                     return roomWillBeDeleted.ref["@ref"].id != ref
                 })
             ))
+
+            toastControler("success", "Destrição removida com sucesso!");
+
         } catch (err){
             console.log(err)
         }
-    }
-    
-    const getDescriptionsOnRoom = async (roomName: string) => {
-        const desc = await axios.post('api/descriptions/readByRoomName', {
-            roomName
-        });
-        if (desc.data.data.length > 0) {
-            setDescriptionsOnRoom(desc.data.data)
-        } else {
-            alert("Não existem descrições nesta sala")
-        }
-
-    }
-    
-    const enterInRoom = async () => {
-        const rooms = await axios.post('api/rooms/verifyIfExistRoom', {
-            roomCode
-        })
-
-        if (rooms.data.roomExist) {
-            router.push(`/app5Ws/${rooms.data.roomName}`);
-        }
-    }
-
-    const handlerShowNewRoom = () => {
-        setShowNewRoom(!showNewRoom)
-    }
-    
-    const handlerShowEnterInRoom = () => {
-        setShowEnterInRoom(!showEnterInRoom)
-    }
-
-    const handlerDescriptionsOnRoomList = () =>{
-        setDescriptionsOnRoom([])
     }
 
     const addNewCommentOnDescription = async (ref: string, prevComments: Comment[]) => {
         try {
             const comment = document.getElementById(`comment-${ref}`) as HTMLInputElement
             const comments = prevComments;
+
             if (comment.value == '') {
                 throw new Error("Digite um comentário!")
             }
@@ -189,6 +191,7 @@ export default function Dashboard ({
                 urlImage: session?.user?.image as string,
                 comment: comment.value
             });
+
             comment.value = "";
             
             const rooms = await axios.post('api/descriptions/addComments', {
@@ -197,8 +200,23 @@ export default function Dashboard ({
             });
 
         } catch (err) {
-            alert(err)
+            const message = (err as Error).message as string
+            toastControler("error", message)
         }
+    }
+
+    // STATE HANDLERS
+
+    const handlerShowNewRoom = () => {
+        setShowNewRoom(!showNewRoom)
+    }
+    
+    const handlerShowEnterInRoom = () => {
+        setShowEnterInRoom(!showEnterInRoom)
+    }
+
+    const handlerDescriptionsOnRoomList = () =>{
+        setDescriptionsOnRoom([])
     }
 
     const handlerDashboardShowOptions = (option: "rooms" | "descriptions") => {
