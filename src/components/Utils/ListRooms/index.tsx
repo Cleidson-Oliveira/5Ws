@@ -1,5 +1,6 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegCopy } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { Button, RoundedButton } from "../Button";
 import { List, Wrapper } from "./style";
 
@@ -27,6 +28,7 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
 
         navigator.clipboard.writeText(value)
         .then(() => {
+            toast.success("Copiado!")
             console.log("Text copied to clipboard...")
         })
         .catch(err => {
@@ -52,9 +54,11 @@ export function ListRoom ({ roomsList, deleteRoom, getDescriptionsOnRoom }: List
                             <span className="pointer" onClick={() => copy(room.data.roomCode)}>
                                 {room.data.roomCode}
                             </span>
-                            <FaRegCopy 
+                            <RoundedButton
                                 onClick={() => copy(room.data.roomCode)}
-                            />
+                            >
+                                <FaRegCopy />
+                            </RoundedButton>
                         </p>
                     </div>
                     <div>

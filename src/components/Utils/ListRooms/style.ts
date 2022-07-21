@@ -39,9 +39,13 @@ export const Wrapper = styled.div`
                 cursor: pointer;
             }
 
-            svg {
+            button {
                 cursor: pointer;
-                font-size: 1.2rem;
+                font-size: 1rem;
+
+                svg {
+                    font-size: inherit;
+                }
             }
         }
     }
@@ -63,6 +67,4 @@ export const Wrapper = styled.div`
     button {
         margin: 0;
     }
-
-    
 `;
