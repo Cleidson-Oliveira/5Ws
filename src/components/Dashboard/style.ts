@@ -59,15 +59,17 @@ export const MainContent = styled.div`
 
         & > div.cardList {
             width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            column-count: 2;
         }
     }
 
     @media only screen and (max-width: 700px) {
         section {
             padding: 10px;
+
+            & > div.cardList {
+                column-count: 1;
+            }
         }
     }
 `;

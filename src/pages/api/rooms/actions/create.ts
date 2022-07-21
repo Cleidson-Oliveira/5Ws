@@ -27,7 +27,7 @@ function HandlerCreateRoom ( req: NextApiRequest, res: NextApiResponse ) {
     )
   )
   .then((createdRoomData) => {
-    res.status(201).json(createdRoomData)
+    res.status(201).json(createdRoomData);
   })
   .catch((err) => console.error(
       'Error: [%s] %s: %s',

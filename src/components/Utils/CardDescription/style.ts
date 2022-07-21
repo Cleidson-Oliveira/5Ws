@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    width: 280px;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     border-radius: .3rem;
     background: #ffffff50;
+    break-inside: avoid-column;
+    margin-bottom: 1rem;
 
     p {
         margin: 10px 0;

@@ -19,15 +19,15 @@ function HandlerCreateDescription (
       },
     )
   )
-  .then((ret) => console.log(ret))
+  .then(() => {
+    res.status(201).json({ success: true });
+  })
   .catch((err) => console.error(
     'Error: [%s] %s: %s',
     err.name,
     err.message,
     err.errors()[0].description,
   ))
-
-  res.status(201).json({ success: true })
 }
 
 export default HandlerCreateDescription;

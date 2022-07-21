@@ -199,6 +199,8 @@ export default function Dashboard ({
                 comments
             });
 
+            toastControler("success", "Comentário adicionado!")
+
         } catch (err) {
             const message = (err as Error).message as string
             toastControler("error", message)

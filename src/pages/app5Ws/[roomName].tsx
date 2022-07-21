@@ -1,20 +1,23 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import axios from "axios";
 import _ from "lodash";
+import { ToastContainer, toast } from "react-toastify";
 
 import Header from "../../components/Header";
 import { Button } from "../../components/Utils/Button";
 import Input from "../../components/Utils/Input";
 import Footer from "../../components/Footer";
+import Image from "../../components/Utils/ImageWillBeDescribed";
+import Wrapper from "./style";
+import { Title } from "../../components/Utils/Title/intex";
 
 import { GlobalStyle } from "../../styles/Global";
-import Wrapper from "./style";
-import Image from "../../components/Utils/ImageWillBeDescribed";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { Title } from "../../components/Utils/Title/intex";
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface QuestionsProps {
     urls: string[]
@@ -61,27 +64,43 @@ export default function Questions ({ urls }: QuestionsProps) {
         })
     }
 
-    const enviar = async () => {
-        const nickName = session?.user?.name as string
+    const createDescription = async () => {
+        const nickName = session?.user?.name as string;
 
-        const t = await axios.post('/api/descriptions/create', {
-            roomName,
-            nickName,
-            url: currentUrl,
-            who, 
-            what, 
-            when, 
-            where, 
-            why,
-            comments: []
-        })
-       
-        handleCurrentUrl();
-        setWho('');
-        setWhat('');
-        setWhen('');
-        setWhere('');
-        setWhy('');
+        try {
+            if (who == '' && what == '' && when == '' && where == '' && why == '') {
+                throw new Error("Escreva algo em algum dos campos!");
+            }
+
+            const createdDescription = await axios.post('/api/descriptions/create', {
+                roomName,
+                nickName,
+                url: currentUrl,
+                who, 
+                what, 
+                when, 
+                where, 
+                why,
+                comments: []
+            })
+
+            if (!createdDescription.data.success) {
+                throw new Error("Algo deu errado!");                
+            }        
+        
+            handleCurrentUrl();
+            setWho('');
+            setWhat('');
+            setWhen('');
+            setWhere('');
+            setWhy('');
+
+            toast.success("Descrição criada com sucesso!");
+
+        } catch (err) {
+            const message = (err as Error).message as string
+            toast.error(message)
+        }
     }
 
     return (
@@ -123,10 +142,11 @@ export default function Questions ({ urls }: QuestionsProps) {
                         name="Why"
                         placeholder="Por que?"
                     />
-                    <Button onClick={() => enviar()}>Enviar</Button>
+                    <Button onClick={() => createDescription()}>Enviar</Button>
                 </section>
             </Wrapper>
             <Footer />
+            <ToastContainer />
         </>
     )
 }
@@ -144,7 +164,7 @@ export async function getStaticProps() {
     );
     
     const urlsResponse = randomImage.data.map((url: Urls) => url.urls.regular);
-    const urls = _.shuffle(urlsResponse)
+    const urls = _.shuffle(urlsResponse);
 
     return {
       props: { urls },
