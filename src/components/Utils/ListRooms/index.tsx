@@ -1,8 +1,10 @@
+import { toast } from "react-toastify";
+
+import { List, Wrapper } from "./style";
+import { Button, RoundedButton } from "../Button";
+
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegCopy } from "react-icons/fa";
-import { toast } from "react-toastify";
-import { Button, RoundedButton } from "../Button";
-import { List, Wrapper } from "./style";
 
 interface RoomsListType {
     data: {
