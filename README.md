@@ -5,10 +5,14 @@
     </br>
 
   <p align="center">
-    Basicamente a página é construída com intuito de desenvolver habilidades em NEXT JS, além contribuir para o aprendizado de línguas, usando os 5Ws ou <i>word questions</i>.
+    A página tem o intuito de auxiliar o desenvolvimento de vocabulário em um novo idioma por meio da descrição de imagens usando os 5Ws ou <i>word questions</i>.
     </br>
     </br>
-    Construído utilisando <b>React-Js</b> e boas praticas de acessibilidade e responsividade para ser um facilitador na hora da utilização.
+    Os 5Ws (Who, What, Where, When e Why) são perguntas básicas além de muito utilizadas no dia a dia são também em estratégias de desenvolvimento projetos e campanhas publicitárias por seu poder na descrição de situações.
+    E com isso sua utilização no desenvolvimento de uma nova língua pode ser de grande valor.
+    </br>
+    </br>
+    Construída utilizando <b>NextJs</b>, está aplicação utiliza a API do <a href="https://unsplash.com/developers">Unsplash</a> para mostrar as imagens que serão descritas, e estas descrições são salvas no FaunaDB.
   </p>
 </p>
 
@@ -45,9 +49,10 @@ Aqui está os principais recursos atuais desta aplicação:
 
 ## Tecnologias
 
-- [Typescript](https://www.typescriptlang.org/)
-- [React js](https://reactjs.org/)
 - [Next js](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [FaunaDb](https://fauna.com/)
+- [React js](https://reactjs.org/)
 - [Next Auth](https://next-auth.js.org/)
 - [Styled-components](https://styled-components.com)
 - [Axios](https://axios-http.com/ptbr/)
