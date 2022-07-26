@@ -12,7 +12,7 @@ export default function Footer () {
                 >
                     Cleidson Oliveira 
                 </a>
-                - 2022
+                2022
             </p>        
         </Wrapper>
     )

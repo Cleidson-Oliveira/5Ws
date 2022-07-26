@@ -19,7 +19,8 @@
 ## Table of Contents
 
 * [Recursos](#recursos)
-* [Tecnologias](#tecnologias)<!-- * [Screenshoots](#screenshoots) -->
+* [Tecnologias](#tecnologias)
+* [Screenshoots](#screenshoots)
 * [Autor](#autor)
 * [Licença](#licença)
 * [Agradecimentos](#agradecimentos)
@@ -54,29 +55,42 @@ Aqui está os principais recursos atuais desta aplicação:
 - [Lodash](https://lodash.com/)
 - [React-icons](https://react-icons.github.io/react-icons/)
 - [React-toastify](https://fkhadra.github.io/react-toastify/introduction)
-
 <br />
 
-<!-- 
 ## Screenshoots
-Aqui estão alguns prints demonstrando o funcionamento da aplicação
+Abaixo estão algumas imagens demonstrando o funcionamento da aplicação.
+<br>
 
-**Página para descrição das imagens :**<br><br>
-<img src="screenshoots/description_page.jpg" width="800px" /><br>
+### Página para descrição das imagens :
+<br>
 
-**Painel de controle :**<br><br>
-<img src="screenshoots/dashboard_page.jpg" width="800px" /><br>
+- É possível mudar imagens ao clicar no botão no canto inferior direito na imagem.
+- Os campos são para descrever as imagens usando a técnica dos 5Ws.
+<br>
+<br>
 
-<br /> 
--->
+<img src="screenshoots/description_page.png" width="800px" /><br>
+<br>
+<br>
+
+### Página Dashboard :
+<br>
+
+- No dashboard é possível visualizar as descrições realizadas por você e por outras pessoas nas suas salas.
+- A pessoa que criou a descrição e o criador da sala podem comentar sobre a descrição.
+- Quem criou a descrição pode apaga-lá com o botão no canto superior direito.
+<br>
+<br>
+
+<img src="screenshoots/dashboard_page.png" width="800px" /><br>
+<br>
 
 ## Autor
 * **Cleidson Oliveira** 
-
 <br />
 
 ## Licença
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 <br />
 

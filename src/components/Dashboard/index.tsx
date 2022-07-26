@@ -229,8 +229,7 @@ export default function Dashboard ({
         <Wrapper>
             <AsideContent>
                 <Title>Dashboard</Title>
-                {/* <Profile /> */}
-                <Button 
+                <Button
                     onClick={() => {
                         handlerDashboardShowOptions("rooms")
                     }}
