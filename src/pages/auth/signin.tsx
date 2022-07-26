@@ -50,7 +50,7 @@ export default function SignIn({ providers }: SignInProps) {
             <Header page="SignIn"/>
             <Wrapper>
                 <div>
-                    <p>Sign In With</p>
+                    <h5>Sign In With</h5>
                     {Object.values(providers).map((provider) => (
                         <Button
                             key={provider.name}

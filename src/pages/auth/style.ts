@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Colors } from "../../styles/Colors";
 
 const Wrapper = styled.main`
     display: flex;
@@ -15,8 +16,14 @@ const Wrapper = styled.main`
         width: 30%;
         min-width: 320px;
         padding: 2.5rem 0;
-        border: 1px solid black;
+        border: 1px solid ${Colors.color1};
         border-radius: 1rem;
+
+        h5 {
+            color: ${Colors.color1};
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
 
         button {
             width: 80%;
