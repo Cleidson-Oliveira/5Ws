@@ -12,7 +12,7 @@ export const List = styled.div`
 export const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr .8fr 1fr;
     min-width: 200px;
     border: 1px solid ${Colors.color1};
     border-radius: .3rem;
@@ -61,7 +61,7 @@ export const Wrapper = styled.div`
         display: flex;
         justify-content: space-around;
         grid-column: 1/7;
-        grid-row: 3/4;
+        grid-row: 4/5;
     }
 
     button {

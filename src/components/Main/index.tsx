@@ -70,7 +70,7 @@ export default function Main () {
             <section>
                 <h2>Tente você também!</h2>
                 <Button onClick={() => { goToDashboard() }} >
-                    Sign In
+                    Começar a usar
                 </Button>
             </section>
             

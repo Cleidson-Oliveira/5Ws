@@ -7,7 +7,6 @@ export const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
     max-width: 350px;
     height: 35px;
     border-radius: 5px;
@@ -18,6 +17,7 @@ export const Button = styled.button`
     margin-top: 20px;
     transition: all .3s ease;
     font-weight: 600;
+    padding: 0 2rem;
 
     :hover {
         color: ${Colors.color5};
@@ -35,6 +35,7 @@ export const RoundedButton = styled(Button)`
     width: 36px;
     height: 36px;
     border-radius: 50%;
+    padding: 0;
 
     svg {
         margin: 0px;

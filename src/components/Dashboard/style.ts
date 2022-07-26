@@ -27,8 +27,9 @@ export const AsideContent = styled.div`
     width: 25%;
 
     button {
-        width: 75%;
+        width: 60%;
     }
+
     @media only screen and (max-width: 700px) {
         padding: 1rem;
         box-sizing: border-box;
