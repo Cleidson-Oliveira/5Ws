@@ -4,8 +4,15 @@ export default function Footer () {
     return (
         <Wrapper>
             <p>
-                Feito com ❤️ por 
-                <a href="https://github.com/Cleidson-Oliveira" target="_blank" rel="noreferrer"> Cleidson Oliveira</a>                
+                Feito por
+                <a 
+                    href="https://github.com/Cleidson-Oliveira" 
+                    target="_blank" 
+                    rel="noreferrer"
+                >
+                    Cleidson Oliveira 
+                </a>
+                - 2022
             </p>        
         </Wrapper>
     )

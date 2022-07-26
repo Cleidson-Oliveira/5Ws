@@ -11,7 +11,12 @@ export const Wrapper = styled.footer`
     background-color: ${Colors.color1};
     color: ${Colors.color4};
 
-    a {
-        font-weight: 600;
+    p {
+        display: inline-flex;
+        gap: .4rem;
+
+        a {
+            font-weight: 600;
+        }
     }
 `;
