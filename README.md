@@ -20,7 +20,16 @@
 <hr />
 <br />
 
-## Table of Contents
+
+## Para testar a aplicação 
+
+1 - Acesse [5Ws](https://5-ws.vercel.app/) <br />
+2 - Realize login com sua conta do google ou facebook  <br />
+3 - Para entrar em uma sala e criar descrições das imagens use o código de teste: **1jwesmz2** <br />
+4 - Você pode criar salas e compartihar o código para que outras pessoas envie suas descrições <br />
+5 - Comente nas descrições que seus amigos ou alunos te enviaram <br />
+
+## Sumário
 
 * [Recursos](#recursos)
 * [Tecnologias](#tecnologias)
