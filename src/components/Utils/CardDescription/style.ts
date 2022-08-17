@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
     background: #ffffff50;
     break-inside: avoid-column;
     margin-bottom: 1rem;
+    box-shadow: #000 5px 5px 20px -5px;
 
     p {
         margin: 10px 0;
